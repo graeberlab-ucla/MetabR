@@ -16,4 +16,6 @@ bar_plot_update_manual(a, met, Title, axis.text.x, scales, type = NULL, num_cond
 \description{
 This function is internally called by bar_update_manual and creates the relative amount barplots for each of the metabolites defined in the pathway of interest.
 }
-
+\author{
+Gerardo Javier, Daniel Tan, Jordan Uyeki
+}

@@ -14,4 +14,6 @@ bar_update_manual(metabolites = 'glycolysis', df = data4, n = num_conditions, ty
 \description{
 This function takes in the pathway of interest, a data frame containing the relative amounts of the different metabolites in the experiment, the number of conditions in the experiment, and the type of analysis or quality control being run. This function returns a page of plots of the relative amounts of the different metabolites that are part of the specified defined pathway ('metabolites' parameter)
 }
-
+\author{
+Gerardo Javier, Daniel Tan, Jordan Uyeki
+}

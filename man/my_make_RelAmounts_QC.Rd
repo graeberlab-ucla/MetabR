@@ -10,4 +10,6 @@ my_make_RelAmounts_QC(DF = data2)
 \description{
 This function transforms the data into a form that can be used for plotting and visualization of the relative amounts of the different metabolites in the analysis.
 }
-
+\author{
+Gerardo Javier, Daniel Tan, Jordan Uyeki
+}
