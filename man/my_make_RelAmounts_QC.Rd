@@ -8,6 +8,6 @@ my_make_RelAmounts_QC(DF = data2)
 \item{DF}{This parameter is a dataframe (data2) that contains information about the sample.  The dataframe should contain the following columns: Name, Iso, Condition, Exp, Value, Used_ID, KEGG.ID, Nr.C, Rt, and Formula columns.}
 }
 \description{
-This function transforms the data into a form that can be used for easier plotting and visualization of the relative amounts of the different metabolites in the analysis.
+This function transforms the data into a form that can be used for plotting and visualization of the relative amounts of the different metabolites in the analysis.
 }
 
