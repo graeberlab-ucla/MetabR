@@ -1,7 +1,0 @@
-Package: MetabR
-Type: Package
-Title: Functions to assist in the current UCLA Metabolomics Quality Control and Analysis Pipeline. 
-Version: 0.1.0
-Author: Gerardo Javier, Daniel Tan, Jordan Uyeki
-Maintainer: Jordan Uyeki <juyeki@ucla.edu>
-Description: This package contains functions to assist in the current UCLA Metabolomics Pipeline. 
