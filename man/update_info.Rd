@@ -1,16 +1,16 @@
 \name{update_info}
 \alias{update_info}
-\title{Update Sample Info Sheet}
+\title{Updates sample information sheet.
+}
 \usage{
-update_info("/User/SampleType/LabName")
+update_info(info_dir = "/Users/juyeki/lab_folder")
 }
 \arguments{
-\item{update_info}{This parameter is the directory where the info sheet is located. DO NOT have a "/" at the end of the update_info parameter.}
+\item{info_dir}{The path to the folder that contains the information sheet that is to be updated.}
 }
 \description{
-This function takes in the directory of the original info sheet, updates it with all the samples and run orders, and then is written out, overriding the old original info sheet.
+This function searches for the information sheet in info_dir (only excel sheet in info_dir should be information sheet), opens it, adds the necessary information, and outputs the new sheet, overriding the original.
 }
 \author{
 Gerardo Javier, Daniel Tan, Jordan Uyeki
 }
-

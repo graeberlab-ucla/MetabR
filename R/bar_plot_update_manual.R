@@ -79,4 +79,3 @@ bar_plot_update_manual <- function(a, met, Title, x, y, axis.text.x, scales, typ
   }
 
 }
-
