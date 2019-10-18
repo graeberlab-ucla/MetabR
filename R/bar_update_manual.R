@@ -113,7 +113,7 @@ bar_update_manual <- function(metabolites, df, repeats, n, type)
     y <- '% Labeled'
     a <-ggplot(met, aes(Iso, Norm_Av, group=Condition, fill=Condition, label=Sig))
     axis.text.x=element_text(size=11, face="bold")
-    bar_plot_update(a, met, Title, x, y, axis.text.x, scales='free', num_cond = n, type = type)
+    bar_plot_update_manual(a, met, Title, x, y, axis.text.x, scales='free', num_cond = n, type = type)
   }
   else if (sum(grepl('Exp', names(df))) >= 1)
   {
