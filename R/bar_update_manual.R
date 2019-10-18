@@ -128,7 +128,7 @@ bar_update_manual <- function(metabolites, df, repeats, n, type)
       y='Relative Amounts'
       a <-ggplot(met, aes(Condition, Norm_Av, group=Condition, fill=Condition, label=Sig))
       axis.text.x=element_blank()
-      bar_plot_update_manual(a, met, Title, x, y, axis.text.x, scales='free')
+      bar_plot_update_manual(a, met, Title, x, y, axis.text.x, scales='free', num_cond = n, type = type)
     } else {
       met = subset(df, Name %in% metabolites)
       stopifnot(length(unique(met$Name)) >= 1)
