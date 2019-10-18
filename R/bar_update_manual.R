@@ -119,7 +119,7 @@ bar_update_manual <- function(metabolites, df, repeats, n, type)
   {
     if (type == "tf")
     {
-      met = subset(bar.type, Name %in% metabolites)
+      met = subset(df, Name %in% metabolites)
       stopifnot(length(unique(met$Name)) >= 1)
       met <-  mutate(met, Name=paste(Name, Sig, sep=' '),
                      Sig='')
