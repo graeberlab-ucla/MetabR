@@ -11,7 +11,7 @@
 #' @export
 #'
 
-update_info <- function(info_dir)
+update_info <- function(info_dir, folder = NULL )
 {
   library(readxl)
   library(xlsx)
@@ -19,13 +19,19 @@ update_info <- function(info_dir)
 
   ICS <- ifelse (grepl("ICS", info_dir), ICS <- TRUE, ICS <- FALSE)
   Medium <- ifelse (grepl("Medium", info_dir), Medium <- TRUE, Medium <- FALSE)
-  if (ICS)
+
+  if (is.null(folder))
   {
-    order_dir <- paste0(info_dir, "/ICS/data")
-  } else if (Medium) {
-    order_dir<-paste0(info_dir,"/Medium/data")
-  }else {
-    order_dir <- paste0(info_dir, "/AA/data")
+    if (ICS)
+    {
+      order_dir <- paste0(info_dir, "/ICS/data")
+    } else if (Medium) {
+      order_dir<-paste0(info_dir,"/Medium/data")
+    }else {
+      order_dir <- paste0(info_dir, "/AA/data")
+    }
+  } else{
+    order_dir <- paste0(info_dir, folder)
   }
 
   #info sheet
