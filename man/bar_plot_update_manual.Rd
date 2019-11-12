@@ -12,6 +12,7 @@ bar_plot_update_manual(a, met, Title, axis.text.x, scales, type = NULL, num_cond
 \item{scales}{Customization of scales. Default of bar_plot_update is "free".}
 \item{type}{The type of quality control or analysis to be run. eg. "250k". This argument is inherited from bar_plot_update when it is called.}
 \item{num_cond}{The number of conditions in the experiment}
+\item{index}{A list of two vectors, the first one containing the indices of the 250Ks and the second one containing the indices of the blanks.}
 }
 \description{
 This function is internally called by bar_update_manual and creates the relative amount barplots for each of the metabolites defined in the pathway of interest.
