@@ -63,9 +63,10 @@ my_make_RelAmounts_QC <- function(DF)
     arrange(Name, Condition) %>%
     # cbind('ANOVA'=ANOVA, 'Sig'=NA) %>%
     group_by(Name) %>%
-    mutate(Norm_Av=Av/Av[1],
-           Norm_Std=Std/Av[1]) %>%
+    mutate(RelAmounts_Ave = Av/Av[1],
+           RelAmounts_Std = Std/Av[1]) %>%
     ungroup()
+
 
   write.csv(data4, file=paste0(Title,"-Amounts unnormalized.csv"), row.names=FALSE)
   save(data4, file='RelAmounts.rdata')
