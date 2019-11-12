@@ -11,7 +11,7 @@
 #' @export
 #'
 
-bar_update_manual <- function(metabolites, df, repeats, n, type)
+bar_update_manual <- function(metabolites, df, repeats, n, type,index)
 {
   if (length(metabolites) > 1)
   {
@@ -98,7 +98,7 @@ bar_update_manual <- function(metabolites, df, repeats, n, type)
     ending <- 'Neurotransmitter levels'
   }
   else ending = ''
-
+  
   if (sum(grepl('MID', names(df))) >= 1)
   {
     met = subset(df, Name %in% metabolites)
@@ -107,13 +107,13 @@ bar_update_manual <- function(metabolites, df, repeats, n, type)
                    Sig='') %>%
       mutate(Iso = factor(Iso, levels = paste(rep(paste('M', 0:50, sep=''), each=4),
                                               c('','*','**','***'), sep='\n')))
-
+    
     Title = paste0("Isotopologue distribution of ",ending)
     x <- 'Isotopologue'
     y <- '% Labeled'
     a <-ggplot(met, aes(Iso, RelAmounts_Ave, group=Condition, fill=Condition, label=Sig))
     axis.text.x=element_text(size=11, face="bold")
-    bar_plot_update_manual(a, met, Title, x, y, axis.text.x, scales='free', num_cond = n, type = type)
+    bar_plot_update_manual(a, met, Title, x, y, axis.text.x, scales='free', num_cond = n, type = type,index)
   }
   else if (sum(grepl('Exp', names(df))) >= 1)
   {
@@ -128,7 +128,7 @@ bar_update_manual <- function(metabolites, df, repeats, n, type)
       y='Relative Amounts'
       a <-ggplot(met, aes(Condition, RelAmounts_Ave, group=Condition, fill=Condition, label=Sig))
       axis.text.x=element_blank()
-      bar_plot_update_manual(a, met, Title, x, y, axis.text.x, scales='free', num_cond = n, type = type)
+      bar_plot_update_manual(a, met, Title, x, y, axis.text.x, scales='free', num_cond = n, type = type,index)
     } else {
       met = subset(df, Name %in% metabolites)
       stopifnot(length(unique(met$Name)) >= 1)
@@ -137,10 +137,10 @@ bar_update_manual <- function(metabolites, df, repeats, n, type)
       y='Relative Amounts'
       a <-ggplot(met, aes(Condition, RelAmounts_Ave, group=Condition, fill=Condition, label = Name))
       axis.text.x=element_blank()
-      bar_plot_update_manual(a, met, Title, x, y, axis.text.x, scales='free', num_cond = n, type = type)
+      bar_plot_update_manual(a, met, Title, x, y, axis.text.x, scales='free', num_cond = n, type = type,index)
     }
   }
-
+  
   else if (sum(grepl('Labeled', names(df))) >= 1)
   {
     met <- subset(df, Name %in% metabolites)
@@ -152,9 +152,9 @@ bar_update_manual <- function(metabolites, df, repeats, n, type)
     y <- '% Labeled'
     a <- ggplot(met, aes(Condition, RelAmounts_Ave, group=Condition, fill=Condition, label=Sig))
     axis.text.x=element_blank()
-    bar_plot_update_manual(a, met, Title, x, y, axis.text.x, scales='fixed', num_cond = n, type = type)
+    bar_plot_update_manual(a, met, Title, x, y, axis.text.x, scales='fixed', num_cond = n, type = type,index)
   }
-
+  
   else if (sum(grepl('FC', names(df))) >= 1)
   {
     met <- subset(df, Name %in% metabolites)
@@ -166,6 +166,6 @@ bar_update_manual <- function(metabolites, df, repeats, n, type)
     y <- '% Fractional Contribution'
     a <- ggplot(met, aes(Condition, RelAmounts_Ave, group=Condition, fill=Condition, label=Sig))
     axis.text.x=element_blank()
-    bar_plot_update_manual(a, met, Title, x, y, axis.text.x, scales='fixed', num_cond = n, type = type)
+    bar_plot_update_manual(a, met, Title, x, y, axis.text.x, scales='fixed', num_cond = n, type = type,index)
   }
 }
