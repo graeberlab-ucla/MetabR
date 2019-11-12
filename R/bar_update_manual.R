@@ -111,7 +111,7 @@ bar_update_manual <- function(metabolites, df, repeats, n, type)
     Title = paste0("Isotopologue distribution of ",ending)
     x <- 'Isotopologue'
     y <- '% Labeled'
-    a <-ggplot(met, aes(Iso, Norm_Av, group=Condition, fill=Condition, label=Sig))
+    a <-ggplot(met, aes(Iso, RelAmounts_Ave, group=Condition, fill=Condition, label=Sig))
     axis.text.x=element_text(size=11, face="bold")
     bar_plot_update_manual(a, met, Title, x, y, axis.text.x, scales='free', num_cond = n, type = type)
   }
@@ -126,7 +126,7 @@ bar_update_manual <- function(metabolites, df, repeats, n, type)
       Title = paste0("Relative amounts of ",ending, " (not corrected for blank values)")
       x=''
       y='Relative Amounts'
-      a <-ggplot(met, aes(Condition, Norm_Av, group=Condition, fill=Condition, label=Sig))
+      a <-ggplot(met, aes(Condition, RelAmounts_Ave, group=Condition, fill=Condition, label=Sig))
       axis.text.x=element_blank()
       bar_plot_update_manual(a, met, Title, x, y, axis.text.x, scales='free', num_cond = n, type = type)
     } else {
@@ -135,7 +135,7 @@ bar_update_manual <- function(metabolites, df, repeats, n, type)
       Title = paste0("Relative amounts of ",ending)
       x=''
       y='Relative Amounts'
-      a <-ggplot(met, aes(Condition, Norm_Av, group=Condition, fill=Condition, label = Name))
+      a <-ggplot(met, aes(Condition, RelAmounts_Ave, group=Condition, fill=Condition, label = Name))
       axis.text.x=element_blank()
       bar_plot_update_manual(a, met, Title, x, y, axis.text.x, scales='free', num_cond = n, type = type)
     }
@@ -150,7 +150,7 @@ bar_update_manual <- function(metabolites, df, repeats, n, type)
     Title <- paste0('Percent labeled in ', ending)
     x <- ''
     y <- '% Labeled'
-    a <- ggplot(met, aes(Condition, Norm_Av, group=Condition, fill=Condition, label=Sig))
+    a <- ggplot(met, aes(Condition, RelAmounts_Ave, group=Condition, fill=Condition, label=Sig))
     axis.text.x=element_blank()
     bar_plot_update_manual(a, met, Title, x, y, axis.text.x, scales='fixed', num_cond = n, type = type)
   }
@@ -164,7 +164,7 @@ bar_update_manual <- function(metabolites, df, repeats, n, type)
     Title <- paste0('Fractional Contribution to ', ending)
     x <- ''
     y <- '% Fractional Contribution'
-    a <- ggplot(met, aes(Condition, Norm_Av, group=Condition, fill=Condition, label=Sig))
+    a <- ggplot(met, aes(Condition, RelAmounts_Ave, group=Condition, fill=Condition, label=Sig))
     axis.text.x=element_blank()
     bar_plot_update_manual(a, met, Title, x, y, axis.text.x, scales='fixed', num_cond = n, type = type)
   }
