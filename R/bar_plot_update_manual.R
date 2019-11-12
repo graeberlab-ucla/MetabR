@@ -79,5 +79,5 @@ bar_plot_update_manual <- function(a, met, Title, x, y, axis.text.x, scales, typ
       geom_errorbar(aes(ymin=RelAmounts_Ave, ymax=RelAmounts_Ave+RelAmounts_Std), position=position_dodge(0.9), width=.2)+
       scale_fill_brewer(palette = "Set1")
   }
-  
+
 }

@@ -98,7 +98,7 @@ bar_update_manual <- function(metabolites, df, repeats, n, type,index)
     ending <- 'Neurotransmitter levels'
   }
   else ending = ''
-  
+
   if (sum(grepl('MID', names(df))) >= 1)
   {
     met = subset(df, Name %in% metabolites)
@@ -107,7 +107,7 @@ bar_update_manual <- function(metabolites, df, repeats, n, type,index)
                    Sig='') %>%
       mutate(Iso = factor(Iso, levels = paste(rep(paste('M', 0:50, sep=''), each=4),
                                               c('','*','**','***'), sep='\n')))
-    
+
     Title = paste0("Isotopologue distribution of ",ending)
     x <- 'Isotopologue'
     y <- '% Labeled'
@@ -140,7 +140,7 @@ bar_update_manual <- function(metabolites, df, repeats, n, type,index)
       bar_plot_update_manual(a, met, Title, x, y, axis.text.x, scales='free', num_cond = n, type = type,index)
     }
   }
-  
+
   else if (sum(grepl('Labeled', names(df))) >= 1)
   {
     met <- subset(df, Name %in% metabolites)
@@ -154,7 +154,7 @@ bar_update_manual <- function(metabolites, df, repeats, n, type,index)
     axis.text.x=element_blank()
     bar_plot_update_manual(a, met, Title, x, y, axis.text.x, scales='fixed', num_cond = n, type = type,index)
   }
-  
+
   else if (sum(grepl('FC', names(df))) >= 1)
   {
     met <- subset(df, Name %in% metabolites)
