@@ -34,7 +34,7 @@ bar_plot_update_manual <- function(a, met, Title, x, y, axis.text.x, scales, typ
         legend.text=element_text(face="bold",size=12),                  #sets legend text
         strip.text=element_text(face="bold", size=15),           #sets theme for title in facets
         panel.grid.major=element_blank()) +
-      geom_errorbar(aes(ymin=Norm_Av, ymax=Norm_Av+Norm_Std), position=position_dodge(0.9), width=.2)+
+      geom_errorbar(aes(ymin=RelAmounts_Ave, ymax=RelAmounts_Ave+RelAmounts_Std), position=position_dodge(0.9), width=.2)+
       scale_fill_manual(values = col)
   }
   else if (type == '250k')
@@ -54,7 +54,7 @@ bar_plot_update_manual <- function(a, met, Title, x, y, axis.text.x, scales, typ
         legend.text=element_text(face="bold",size=12),                  #sets legend text
         strip.text=element_text(face="bold", size=15),           #sets theme for title in facets
         panel.grid.major=element_blank()) +
-      geom_errorbar(aes(ymin=Norm_Av, ymax=Norm_Av+Norm_Std), position=position_dodge(0.9), width=.2)+
+      geom_errorbar(aes(ymin=RelAmounts_Ave, ymax=RelAmounts_Ave+RelAmounts_Std), position=position_dodge(0.9), width=.2)+
       scale_fill_brewer(palette = "Spectral")
   }
   else
@@ -74,7 +74,7 @@ bar_plot_update_manual <- function(a, met, Title, x, y, axis.text.x, scales, typ
         legend.text=element_text(face="bold",size=12),                  #sets legend text
         strip.text=element_text(face="bold", size=15),           #sets theme for title in facets
         panel.grid.major=element_blank()) +
-      geom_errorbar(aes(ymin=Norm_Av, ymax=Norm_Av+Norm_Std), position=position_dodge(0.9), width=.2)+
+      geom_errorbar(aes(ymin=RelAmounts_Ave, ymax=RelAmounts_Ave+RelAmounts_Std), position=position_dodge(0.9), width=.2)+
       scale_fill_brewer(palette = "Set1")
   }
 
