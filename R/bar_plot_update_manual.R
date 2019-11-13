@@ -11,7 +11,7 @@
 #' @export
 #'
 
-bar_plot_update_manual <- function(a, met, Title, x, y, axis.text.x, scales, type = NULL, num_cond=NULL,index)
+bar_plot_update_manual <- function(a, met, Title, x, y, axis.text.x, scales, type = NULL, num_cond=NULL,index = NULL)
 {
   if (num_cond > 11)
   {

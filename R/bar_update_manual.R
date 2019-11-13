@@ -11,7 +11,7 @@
 #' @export
 #'
 
-bar_update_manual <- function(metabolites, df, repeats, n, type,index)
+bar_update_manual <- function(metabolites, df, repeats, n, type,index = NULL)
 {
   if (length(metabolites) > 1)
   {
