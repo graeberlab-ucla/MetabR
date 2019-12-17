@@ -41,9 +41,9 @@ make_PCA2_update <- function(matrix, a=1, b=2, cutoff = 0.5)
   loadings <- data.frame(pca$rotation)
   loadings$Name <- rownames(loadings)
   loadings <- select(loadings, Name, everything())
-  write.csv(loadings, file=paste0(Title,'-Loadings-',ext,'.csv'), row.names=T)
+  write.csv(loadings, file=paste0(Title,'-PC Loadings-',ext,'.csv'), row.names=T)
   scores=pca$x
-  write.csv(scores, file=paste0(Title,'-Scores-',ext,'.csv'), row.names=T)
+  write.csv(scores, file=paste0(Title,'-PC Scores-',ext,'.csv'), row.names=T)
 
   PC.title=paste(Title,'-PC',a, ' vs. PC', b, '-PCA Plots2-', ext, '.pdf', sep='')
   pdf(file = PC.title, width=16, height=10)
