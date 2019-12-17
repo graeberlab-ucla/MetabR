@@ -28,7 +28,10 @@ if (exists('samples')==F) samples <- info
 ann <- select(samples, Condition, Cell.Number) %>%
   as.data.frame()
 rownames(ann) <- colnames(matrix)
+
 if (exists('Norv')==T) {
+  if(all(is.na(Norv)))
+    Norv <- rep(1, length(Norv))
   ann$Norvaline <- Norv
 } else ann$Norvaline <- 1
 
