@@ -7,4 +7,4 @@ export(update_info)
 export(make_PCA2_update)
 export(make_istd)
 export(plot_istd)
-
+export(make_heatmap)
