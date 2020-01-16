@@ -99,12 +99,12 @@ bar_update_manual <- function(metabolites, df, repeats, n, type,index = NULL)
   }
   else if (metabolites == "nonpathway_ics")
   {
-    metabolites <- data(nonpathway_ics)
+    metabolites <- nonpathway_ics
     ending <- 'metabolites not in canonical pathways'
   }
   else if (metabolites == "nonpathway_vanq")
   {
-    metabolites <- data(nonpathway_vanq)
+    metabolites <- nonpathway_vanq
     ending <- 'metabolites not in canonical pathways'
   }
   else ending = ''
