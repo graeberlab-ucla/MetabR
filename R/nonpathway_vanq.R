@@ -1,4 +1,4 @@
-#' File containing a vector metabolites (from Vanq) that are not a part of the 15 pathways analyzed by the UCLA Metabolmics Center.
+#' File containing a vector metabolites (from Vanq) that are not a part of the 15 pathways analyzed by the UCLA Metabolomics Center.
 #'
 #'
 #' @docType data
