@@ -97,6 +97,11 @@ bar_update_manual <- function(metabolites, df, repeats, n, type,index = NULL)
     metabolites <- Neurotrans
     ending <- 'Neurotransmitter levels'
   }
+  else if (metabolites == "nonpathway")
+  {
+    metabolites <- nonpathway_metabolites
+    ending <- 'metabolites not in canonical pathways'
+  }
   else ending = ''
 
   if (sum(grepl('MID', names(df))) >= 1)
