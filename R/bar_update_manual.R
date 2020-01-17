@@ -6,16 +6,27 @@
 #'
 #' @return a page of plots of the relative amounts of the different metabolites that are part of the specified defined pathway ('metabolites' parameter)
 #'
-#' @examples bar_update_manual(metabolites = 'glycolysis', df = data4, n = num_conditions, type = "blank")
+#' @examples bar_update_manual(metabolites = 'glycolysis', df = data4, n = num_conditions, type = "blank", title_type = "nonpathway")
 #'
 #' @export
 #'
 
-bar_update_manual <- function(metabolites, df, repeats, n, type,index = NULL)
+bar_update_manual <- function(metabolites, df, repeats, n, type,index = NULL, title_type)
 {
   if (length(metabolites) > 1)
   {
-    ending <- 'select metabolites'
+    if(title_type == 'nonpathway')
+    {
+      ending <- 'metabolites not part of canonical pathways'
+    }
+    else if(title_type == 'medium')
+    {
+      ending <- 'metabolites found in medium'
+    }
+    else
+    {
+      ending <- 'select metabolites'
+    }
   }
   else if (metabolites == 'glycolysis')
   {
@@ -97,22 +108,12 @@ bar_update_manual <- function(metabolites, df, repeats, n, type,index = NULL)
     metabolites <- Neurotrans
     ending <- 'Neurotransmitter levels'
   }
-  else if (metabolites == "nonpathway_ics")
-  {
-    metabolites <- nonpathway_ics
-    ending <- 'metabolites not in canonical pathways'
-  }
-  else if (metabolites == "nonpathway_vanq")
-  {
-    metabolites <- nonpathway_vanq
-    ending <- 'metabolites not in canonical pathways'
-  }
   else ending = ''
 
   if (sum(grepl('MID', names(df))) >= 1)
   {
     met = subset(df, Name %in% metabolites)
-    #stopifnot(length(unique(met$Name)) >= 1)
+    stopifnot(length(unique(met$Name)) >= 1)
     met <-  mutate(met, Iso=paste(Iso, Sig, sep='\n'),
                    Sig='') %>%
       mutate(Iso = factor(Iso, levels = paste(rep(paste('M', 0:50, sep=''), each=4),
@@ -130,7 +131,7 @@ bar_update_manual <- function(metabolites, df, repeats, n, type,index = NULL)
     if (type == "tf")
     {
       met = subset(df, Name %in% metabolites)
-      #stopifnot(length(unique(met$Name)) >= 1)
+      stopifnot(length(unique(met$Name)) >= 1)
       met <-  mutate(met, Name=paste(Name, Sig, sep=' '),
                      Sig='')
       Title = paste0("Relative amounts of ",ending, " (not corrected for blank values)")
@@ -141,7 +142,7 @@ bar_update_manual <- function(metabolites, df, repeats, n, type,index = NULL)
       bar_plot_update_manual(a, met, Title, x, y, axis.text.x, scales='free', num_cond = n, type = type,index)
     } else {
       met = subset(df, Name %in% metabolites)
-      #stopifnot(length(unique(met$Name)) >= 1)
+      stopifnot(length(unique(met$Name)) >= 1)
       Title = paste0("Relative amounts of ",ending)
       x=''
       y='Relative Amounts'
@@ -154,7 +155,7 @@ bar_update_manual <- function(metabolites, df, repeats, n, type,index = NULL)
   else if (sum(grepl('Labeled', names(df))) >= 1)
   {
     met <- subset(df, Name %in% metabolites)
-    #stopifnot(length(unique(met$Name)) >= 1)
+    stopifnot(length(unique(met$Name)) >= 1)
     met <-  mutate(met, Name=paste(Name, Sig, sep=' '),
                    Sig='')
     Title <- paste0('Percent labeled in ', ending)
@@ -168,7 +169,7 @@ bar_update_manual <- function(metabolites, df, repeats, n, type,index = NULL)
   else if (sum(grepl('FC', names(df))) >= 1)
   {
     met <- subset(df, Name %in% metabolites)
-    #stopifnot(length(unique(met$Name)) >= 1)
+    stopifnot(length(unique(met$Name)) >= 1)
     met <-  mutate(met, Name=paste(Name, Sig, sep=' '),
                    Sig='')
     Title <- paste0('Fractional Contribution to ', ending)
