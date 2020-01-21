@@ -94,6 +94,5 @@ RelAmounts_250K <- function (df)
   }
 
   write.csv(data4, file=paste0(Title,"-Amounts unnormalized.csv"), row.names=FALSE)
-  save(data4, file='RelAmounts.rdata')
   return(data4)
 }
