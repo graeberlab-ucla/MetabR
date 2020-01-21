@@ -67,8 +67,6 @@ my_make_RelAmounts_QC <- function(DF)
            RelAmounts_Std = Std/Av[1]) %>%
     ungroup()
 
-
   write.csv(data4, file=paste0(Title,"-Amounts unnormalized.csv"), row.names=FALSE)
-  save(data4, file='RelAmounts.rdata')
   return(data4)
 }
