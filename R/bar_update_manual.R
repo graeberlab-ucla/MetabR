@@ -15,9 +15,17 @@ bar_update_manual <- function(metabolites, df, repeats, n, type,index = NULL, ti
 {
   if (length(metabolites) > 1)
   {
-    if(title_type == 'nonpathway')
+    if(title_type == 'nonpathway1')
     {
-      ending <- 'metabolites not part of canonical pathways'
+      ending <- 'other metabolites - I'
+    }
+    else if(title_type == 'nonpathway2')
+    {
+      ending <- 'other metabolites - II'
+    }
+    else if(title_type == 'nonpathway3')
+    {
+      ending <- 'other metabolites - III'
     }
     else if(title_type == 'medium')
     {
