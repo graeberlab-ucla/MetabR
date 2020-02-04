@@ -8,6 +8,7 @@ make_heatmap(matrix = RelA, samples = samples, heat.color = normal, width = 8, h
 \item{matrix}{A dataframe containing the relative amounts.}
 \item{samples}{A dataframe with information on the samples.}
 \item{heat.color}{The color scheme that is to be used in the heatmap.}
+\item{to_cluster}{Optional parameter (default is TRUE) indicating whether or not the outputted heatmap is to be clustered.}
 \item{width}{Optional parameter to set width dimensions of pdf output plot.}
 \item{height}{Optional parameter to set height dimensions of pdf output plot.}
 }
