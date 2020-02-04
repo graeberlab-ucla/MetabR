@@ -8,6 +8,7 @@ RelAmounts(DF = data2, anova = TRUE, type = '250K')
 \item{DF}{This parameter is a dataframe (data2) that contains information about the sample. The dataframe should contain the following columns: Name, Iso, Condition, Exp, Value, Used_ID, KEGG.ID, Nr.C, Rt, and Formula columns.}
 \item{anova}{Optional parameter (default is FAlSE). Set to true if ANOVA is to be calculated (for actual analysis).}
 \item{type}{Optional parameter. Set to '250K' if running 250K QC script.}
+\item{output}{Optional parameter (default is FALSE). Set to TRUE if the Amounts.csv is to be outputted.}
 }
 \description{
 This function transforms the data into a form that can be used for plotting and visualization of the relative amounts of the different metabolites in the analysis.
