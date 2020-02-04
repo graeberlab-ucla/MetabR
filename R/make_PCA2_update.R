@@ -6,7 +6,7 @@
 #'
 #' @return A pdf file with a scree plot, a pair plot with the first five PCs, and a PCA plot with PCs a and b.
 #'
-#' @examples update_info(info_dir = "/Users/juyeki/lab_folder")
+#' @examples make_PCA2_update(matrix = RelA)
 #'
 #' @export
 #'
