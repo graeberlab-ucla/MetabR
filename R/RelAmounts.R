@@ -92,7 +92,7 @@ RelAmounts <- function(DF, anova = F, type = 'NULL')
 
     Rel_function <- function(x)
     {
-      if(x[1] == 0)
+      if(x[1] == 0 | is.na(x[1]))
         x = x / 1
       else
         x = x / x[1]
