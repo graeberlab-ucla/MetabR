@@ -2,7 +2,7 @@
 #'
 #' @description This package contains functions to assist in the current UCLA Metabolomics Quality Control and Analysis Pipeline.
 #'
-#' @param a data frame containing sample data, an optional anova parameter (set to TRUE if ANOVA is to be calculated), and an optional type parameter (set to '250K').
+#' @param a data frame containing sample data, an optional anova parameter (set to TRUE if ANOVA is to be calculated), an optional type parameter (set to '250K'), and an optional parameter indicating whether or not the dataframe is to be outputted to current working directory.
 #'
 #' @return a data frame that is in the correct format for the bar_update_manual function to create the Relative Amounts plot.
 #'
@@ -10,7 +10,7 @@
 #'
 #' @export
 
-RelAmounts <- function(DF, anova = F, type = 'NULL')
+RelAmounts <- function(DF, anova = F, type = 'NULL', output = F)
 {
   if (exists('Title')==F) stop('Title not specified')
   data4 <- DF %>%
@@ -114,5 +114,7 @@ RelAmounts <- function(DF, anova = F, type = 'NULL')
       ungroup()
   }
 
+  if(output)
+    write.csv(data4, file = paste0(Title, "-Amounts.csv"), row.names = FALSE)
   return(data4)
 }
