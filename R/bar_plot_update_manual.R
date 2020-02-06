@@ -14,7 +14,7 @@
 bar_plot_update_manual <- function(a, met, Title, x, y, axis.text.x, scales, type = NULL, num_cond=NULL,index = NULL)
 {
   color = grDevices::colors()[grep('gr(a|e)y', grDevices::colors(), invert = T)]
-  col<-c("turquoise","red","plum4","steelblue1","red4","springgreen2","slateblue2","sienna1","darkgreen","khaki1","lightpink1","navy","olivedrab1",
+  col<-c("turquoise","red","plum4","steelblue1","red4","springgreen2","slateblue2","sienna1","darkgreen","lightpink1","navy","olivedrab1",
          "orangered","darkslateblue","lightseagreen","magenta2","royalblue","yellowgreen","lightsalmon","cyan","maroon1","indianred3","mediumseagreen",
          "slateblue3","hotpink","lemonchiffon1","orangered4","lightcoral","tomato")
   col[index[[1]]]<-"yellow1"
