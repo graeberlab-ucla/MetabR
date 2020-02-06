@@ -11,7 +11,7 @@
 #' @export
 #'
 
-bar_update_manual <- function(metabolites, df, repeats, n, type,index = NULL, title_type)
+bar_update_manual <- function(metabolites, df, repeats, n, type,index = NULL, title_type, only_M0 = NA)
 {
   if (length(metabolites) > 1)
   {
@@ -122,17 +122,21 @@ bar_update_manual <- function(metabolites, df, repeats, n, type,index = NULL, ti
   {
     met = subset(df, Name %in% metabolites)
     stopifnot(length(unique(met$Name)) >= 1)
-    met <-  mutate(met, Iso=paste(Iso, Sig, sep='\n'),
-                   Sig='') %>%
+    met <-  mutate(met, Iso=paste(Iso, Sig, sep='\n'), Sig='') %>%
       mutate(Iso = factor(Iso, levels = paste(rep(paste('M', 0:50, sep=''), each=4),
                                               c('','*','**','***'), sep='\n')))
-
     Title = paste0("Isotopologue distribution of ",ending)
     x <- 'Isotopologue'
     y <- '% Labeled'
     a <-ggplot(met, aes(Iso, RelAmounts_Ave, group=Condition, fill=Condition, label=Sig))
-    axis.text.x=element_text(size=11, face="bold")
-    bar_plot_update_manual(a, met, Title, x, y, axis.text.x, scales='free', num_cond = n, type = type,index)
+
+    temp <- a$data
+    if(sum(unique(temp$Name) %in% only_M0) >  0)
+      temp <- temp[-which(temp$Name %in% only_M0),]
+    a$data <- temp
+
+    axis.text.x=element_text(size=7, face="bold") #size was originally 11
+    bar_plot_update_manual(a, met, Title, x, y, axis.text.x, scales='free', num_cond = n, type = "tf")
   }
   else if (sum(grepl('Exp', names(df))) >= 1)
   {
@@ -164,26 +168,40 @@ bar_update_manual <- function(metabolites, df, repeats, n, type,index = NULL, ti
   {
     met <- subset(df, Name %in% metabolites)
     stopifnot(length(unique(met$Name)) >= 1)
+    met$Names <- met$Name
     met <-  mutate(met, Name=paste(Name, Sig, sep=' '),
                    Sig='')
     Title <- paste0('Percent labeled in ', ending)
     x <- ''
     y <- '% Labeled'
     a <- ggplot(met, aes(Condition, RelAmounts_Ave, group=Condition, fill=Condition, label=Sig))
+
+    temp <- a$data
+    if(sum(unique(temp$Names) %in% only_M0) >  0)
+      temp <- temp[-which((temp$Names %in% only_M0)),]
+    a$data <- temp
+
     axis.text.x=element_blank()
-    bar_plot_update_manual(a, met, Title, x, y, axis.text.x, scales='fixed', num_cond = n, type = type,index)
+    bar_plot_update_manual(a, met, Title, x, y, axis.text.x, scales='fixed', num_cond = n, type = type, index)
   }
 
   else if (sum(grepl('FC', names(df))) >= 1)
   {
     met <- subset(df, Name %in% metabolites)
     stopifnot(length(unique(met$Name)) >= 1)
+    met$Names <- met$Name ##
     met <-  mutate(met, Name=paste(Name, Sig, sep=' '),
                    Sig='')
     Title <- paste0('Fractional Contribution to ', ending)
     x <- ''
     y <- '% Fractional Contribution'
     a <- ggplot(met, aes(Condition, RelAmounts_Ave, group=Condition, fill=Condition, label=Sig))
+
+    temp <- a$data
+    if(sum(unique(temp$Names) %in% only_M0) >  0)
+      temp <- temp[-which((temp$Names %in% only_M0)),]
+    a$data <- temp
+
     axis.text.x=element_blank()
     bar_plot_update_manual(a, met, Title, x, y, axis.text.x, scales='fixed', num_cond = n, type = type,index)
   }
