@@ -98,7 +98,14 @@ RelAmounts <- function(DF, anova = F, type = 'NULL', output = F)
         x = x / x[1]
     }
     Rel_Av <- as.vector(sapply(temp, function(x) Rel_function(x$Av)))
-    Std_Av <- as.vector(sapply(temp, function(x) Rel_function(x$Std)))
+    Rel_Std <- function(x)
+    {
+      if(x$Av[1] == 0 | is.na(x$Av[1]))
+        x$Std = x$Std / 1
+      else
+        x$Std = x$Std / x$Av[1]
+    }
+    Std_Av <- as.vector(sapply(temp, function(x) Rel_Std(x)))
 
     data4 <- data4 %>% mutate(RelAmounts_Ave = Rel_Av, RelAmounts_Std = Std_Av)
   }
