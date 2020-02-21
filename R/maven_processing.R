@@ -1,3 +1,4 @@
+
 maven_processing<-function(maven_raw){
   maven_raw<-data.frame(maven_raw)
   
@@ -8,7 +9,7 @@ maven_processing<-function(maven_raw){
   maven_raw<-rbind(empty_first_vector,maven_raw)
   
   
-  w<-data.frame(matrix(ncol=ncol(maven_raw)+1,nrow=800))
+  w<-data.frame(matrix(ncol=ncol(maven_raw)+1,nrow=nrow(maven_raw)))
   colnames(w)<-new_colnames
   
   w_index=1
