@@ -2,7 +2,7 @@
 #'
 #' @description This package contains functions to assist in the current UCLA Metabolomics Quality Control and Analysis Pipeline.
 #'
-#' @param A dataframe containing the relative amounts data, a data frame with information on the samples, and the heatmap color scheme. to_cluster is an optional parameter (default is TRUE) that indicates whether or not the outputted heatmaps are to be clustered. Height and width are optional parameters indicating dimensions of pdf output.
+#' @param A dataframe containing the relative amounts data, a data frame with information on the samples, and the heatmap color scheme. cluster_samples is an optional parameter (default is TRUE) that indicates whether or not the samples are to be clustered. Height and width are optional parameters indicating dimensions of pdf output.
 #'
 #' @return An annotated heatmap in a pdf file.
 #'
@@ -12,7 +12,7 @@
 #'
 
 
-make_heatmap <- function(matrix, samples=samples, heat.color=normal, to_cluster = TRUE, width = NA, height = NA)
+make_heatmap <- function(matrix, samples=samples, heat.color=normal, cluster_samples = TRUE, width = NA, height = NA)
 {
   if (gsub('(.)*_|[0-9]','',colnames(matrix))[1]=='Exp') {
     ext = 'Relative Amounts'
@@ -46,7 +46,7 @@ make_heatmap <- function(matrix, samples=samples, heat.color=normal, to_cluster 
   heatmap.title=paste(Title, '-Heatmap-',ext,'.pdf', sep='')
   if(is.na(width) & is.na(height))
   {
-    pheatmap::pheatmap(matrix, cluster_row = to_cluster, cluster_col = to_cluster,
+    pheatmap::pheatmap(matrix, cluster_row = T, cluster_col = cluster_samples,
                        clustering_distance_rows='correlation',
                        clustering_distance_cols='correlation',
                        color = colorRampPalette(heat.color)(100),
@@ -57,7 +57,7 @@ make_heatmap <- function(matrix, samples=samples, heat.color=normal, to_cluster 
                        filename=heatmap.title)
   } else
   {
-    pheatmap::pheatmap(matrix, cluster_row = to_cluster, cluster_col = to_cluster,
+    pheatmap::pheatmap(matrix, cluster_row = T, cluster_col = cluster_samples,
                        clustering_distance_rows='correlation',
                        clustering_distance_cols='correlation',
                        color = colorRampPalette(heat.color)(100),
