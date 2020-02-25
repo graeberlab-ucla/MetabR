@@ -44,6 +44,8 @@ make_heatmap <- function(matrix, samples=samples, heat.color=normal, cluster_sam
 
   matrix[is.na(matrix)] <- 0
   heatmap.title=paste(Title, '-Heatmap-',ext,'.pdf', sep='')
+  if(!cluster_samples)
+    heatmap.title=paste(Title, '-Unclustered Heatmap-',ext,'.pdf', sep='')
   if(is.na(width) & is.na(height))
   {
     pheatmap::pheatmap(matrix, cluster_row = T, cluster_col = cluster_samples,
