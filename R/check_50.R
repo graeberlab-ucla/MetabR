@@ -10,10 +10,14 @@ check_50<-function(df)
   } else if(sum(grepl('FC', names(df))) >= 1)
   {
     text <- "FC"
-  }else
+  }else if(sum(grepl('Exp', names(df))) >= 1)
   {
     text <- "Exp"
+  }else if(sum(grepl('Labeled', names(df))) >= 1)
+  {
+    text  <- "Labeled"
   }
+ 
   
   num_exp<-length(grep(text,colnames(df)))
   thresh<-round(length(grep(text,colnames(df)))/2)
