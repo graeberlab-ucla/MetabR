@@ -42,7 +42,7 @@ bar_plot_update_manual <- function(a, met, Title, x, y, axis.text.x, scales, typ
     col <- res
   }
   
-  if (num_cond > 11)
+  if (num_cond > 20)
   {
     a + geom_bar(position="dodge", stat="identity", width=0.9)  +
       geom_bar(aes(linetype=under_50_percent,color = under_50_percent, size=under_50_percent),position="dodge", stat="identity", width=0.9) +
