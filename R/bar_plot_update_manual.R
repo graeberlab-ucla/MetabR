@@ -41,7 +41,7 @@ bar_plot_update_manual <- function(a, met, Title, x, y, axis.text.x, scales, typ
     col <- res
   }
   
-  if (num_cond > 20)
+  if (num_cond > 11)
   {
     a + geom_bar(position="dodge", stat="identity", width=0.9)  +
       geom_bar(aes(linetype=under_50_percent,color = under_50_percent, size=under_50_percent),position="dodge", stat="identity", width=0.9) +
@@ -64,7 +64,29 @@ bar_plot_update_manual <- function(a, met, Title, x, y, axis.text.x, scales, typ
       scale_fill_manual(values = col)+ geom_text(aes(label=under_50_percent), position=position_dodge(width=0.9), vjust=-0.25)+
       geom_bar(position="dodge", stat="identity", colour="black", width=0.9)
   }
-  
+  else if (type == '250k')
+  {
+    a + geom_bar(position="dodge", stat="identity", width=0.9) +
+      geom_bar(aes(linetype=under_50_percent,color = under_50_percent, size=under_50_percent),position="dodge", stat="identity", width=0.9) +
+      guides(linetype=FALSE)+
+      scale_size_manual(values=c(0.3,0.8), guide = F) + scale_colour_manual(values = c("black", "gray29"), guide = F) +
+      geom_bar(position="dodge", stat="identity", colour="black", width=0.9) +
+      #geom_bar(position="dodge", stat="identity", colour="black", width=0.9) +
+      facet_wrap( ~ Name, scales=scales) +
+      theme_bw() + scale_linetype_manual(values=c("solid","58"))+
+      labs(x=x, y=y, title=Title, fill=element_blank()) +
+      theme(
+        plot.title=element_text(size=20, face="bold", vjust=2),         #sets title properties
+        axis.title=element_text(size=16, lineheight=20, face="bold"),   #sets theme for axis font
+        axis.text=element_text(size=11, face="bold"),
+        axis.text.x=axis.text.x,
+        legend.title=element_text(face="bold", size=12),
+        legend.text=element_text(face="bold",size=12),                  #sets legend text
+        strip.text=element_text(face="bold", size=15),           #sets theme for title in facets
+        panel.grid.major=element_blank()) +
+      geom_errorbar(aes(ymin=RelAmounts_Ave, ymax=RelAmounts_Ave+RelAmounts_Std), position=position_dodge(0.9), width=.2)+
+      scale_fill_manual(values = col)
+  }
   else
   {
     a + geom_bar(position="dodge", stat="identity", width=0.9) +
