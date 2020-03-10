@@ -71,7 +71,7 @@ bar_plot_update_manual <- function(a, met, Title, x, y, axis.text.x, scales, typ
       geom_bar(aes(linetype=under_50_percent,color = under_50_percent, size=under_50_percent),position="dodge", stat="identity", width=0.9) +
       guides(linetype=FALSE)+
       scale_size_manual(values=c(0.3,0.8), guide = F) + scale_colour_manual(values = c("black", "gray29"), guide = F) +
-      geom_bar(position="dodge", stat="identity", colour="black", width=0.9) +
+      #geom_bar(position="dodge", stat="identity", colour="black", width=0.9) +
       facet_wrap( ~ Name, scales=scales) +
       theme_bw() + scale_linetype_manual(values=c("solid","58"))+
       labs(x=x, y=y, title=Title, fill=element_blank()) +
