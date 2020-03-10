@@ -54,7 +54,7 @@ bar_plot_update_manual <- function(a, met, Title, x, y, axis.text.x, scales, typ
       scale_fill_manual(values = col)+ geom_text(aes(label=under_50_percent), position=position_dodge(width=0.9), vjust=-0.25)+
       geom_bar(position="dodge", stat="identity", colour="black", width=0.9)
   }
-  else if (type == '250k')
+  else if (type == '250kx')
   {
     a + geom_bar(position="dodge", stat="identity", width=0.9) +
       geom_bar(aes(linetype=under_50_percent,color = under_50_percent, size=under_50_percent),position="dodge", stat="identity", width=0.9) +
