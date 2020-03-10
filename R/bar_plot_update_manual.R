@@ -62,8 +62,7 @@ bar_plot_update_manual <- function(a, met, Title, x, y, axis.text.x, scales, typ
         strip.text=element_text(face="bold", size=15),           #sets theme for title in facets
         panel.grid.major=element_blank()) +
       geom_errorbar(aes(ymin=RelAmounts_Ave, ymax=RelAmounts_Ave+RelAmounts_Std), position=position_dodge(0.9), width=.2)+
-      scale_fill_manual(values = col)+ geom_text(aes(label=under_50_percent), position=position_dodge(width=0.9), vjust=-0.25)+
-      geom_bar(position="dodge", stat="identity", colour="black", width=0.9)
+      scale_fill_manual(values = col)
   }
 
   else
