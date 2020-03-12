@@ -19,12 +19,15 @@ update_info <- function(info_dir, folder = NULL )
 
   ICS <- ifelse (grepl("ICS", info_dir), ICS <- TRUE, ICS <- FALSE)
   Medium <- ifelse (grepl("Medium", info_dir), Medium <- TRUE, Medium <- FALSE)
+  Cond_Medium <- ifelse (grepl("Cond Medium", info_dir), Cond_Medium <- TRUE, Cond_Medium <- FALSE)
 
   if (is.null(folder))
   {
     if (ICS)
     {
       order_dir <- paste0(info_dir, "/ICS/data")
+    } else if (Cond_Medium){
+      order_dir <- paste0(info_dir, "/AA/data")
     } else if (Medium) {
       order_dir<-paste0(info_dir,"/Medium/data")
     }else {
