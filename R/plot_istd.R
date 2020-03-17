@@ -11,9 +11,9 @@
 #' @export
 #'
 
-plot_istd <- function(Std, info, title)
+plot_istd <- function(Std, info, title,pdf_width=14)
 {
-  pdf(title, width=14, height=10)
+  pdf(title, width=pdf_width, height=10)
   std_plot<-ggplot(Std, aes(Sample, log(Value,10)))+
     geom_point(size=3)+
     facet_wrap(~ID, scales='free')+
