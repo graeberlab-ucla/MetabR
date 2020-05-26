@@ -15,7 +15,6 @@ maven_processing(x)
   \item{maven_raw}{The raw maven data file.}
 %%     ~~Describe \code{x} here~~
 }
-}
 \details{
 %%  ~~ If necessary, more details than the description above ~~
 }
