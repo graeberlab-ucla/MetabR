@@ -11,6 +11,16 @@
 #' @export
 #'
 
+library(qdap)
+library(tidyverse)
+library(dplyr)
+library(data.table)
+library(tidyr)
+library(IsoCorrectoR)
+library(writexl)
+library(stringr)
+library(readr)
+library(plyr)
 
 
 correct_iso<-function(df,label,correction){
