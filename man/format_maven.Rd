@@ -2,7 +2,7 @@
 \alias{format_maven}
 \title{Formats the Maven-processed data into the correct format for further analysis.}
 \usage{
-format_maven(data_sheet = "data.xlsx", sheets = c(1:2), output = "output.csv)
+format_maven(data_sheet = "data.xlsx", sheets = c(1:2), output = "output.csv")
 }
 \arguments{
 \item{data_sheet}{An excel sheet that contains the Maven processed data.}
