@@ -11,11 +11,6 @@
 #' @export
 
 
-DF = data2
-anova = TRUE
-output = T
-type = 'NULL'
-
 RelAmounts <- function(DF, anova = F, type = 'NULL', output = F)
 {
   if (exists('Title')==F) stop('Title not specified')
@@ -69,29 +64,17 @@ RelAmounts <- function(DF, anova = F, type = 'NULL', output = F)
     ANOVA=suppressWarnings(sapply(data8, function(x) anova(aov(x$Amount~x$Condition))$Pr[1]))
     ANOVA=rep(ANOVA,1,each=length(levels(data4$Condition)))
 
-
-
-data4_archive <- data4
-
-
-data4 <- data4_archive
-
     data4 <- data4 %>%
       select(Name, KEGG.ID, Condition, Exp, Amount, Av, Std, CV) %>%
       spread(Exp, Amount) %>%
       arrange(Name, Condition) %>%
       cbind('ANOVA'=ANOVA, 'Sig'=NA) %>%
       group_by(Name) %>%
-      #mutate(Norm_Av =ifelse((Av[1]==0 | is.na(Av[1])), Av,  Av/Av[1]),
-      #       Norm_Std=ifelse((Av[1]==0 | is.na(Av[1])), Std, Std/Av[1])) %>%
       mutate(Av2 = ifelse((Av==0|is.na(Av)),NA,Av)) %>%
       mutate(denom=min(Av2, na.rm = TRUE)) %>%
-      mutate(Norm_Av = Av/denom,
-             Norm_Std= Std/denom) %>%
+      mutate(Norm_Av  = Av/denom,
+             Norm_Std = Std/denom) %>%
       ungroup()
-
-
-    ########met = subset(data4, Name %in% c("P-Ser"))
 
     for (i in 1:nrow(data4))
     {
@@ -102,7 +85,7 @@ data4 <- data4_archive
       else data4$Sig[i]=""
     }
   }
-  else if(type == '250K')
+  else if(0 & type == '250K') #old block for 250K, but with edits the next block should be more universal
   {
     data4 <- data4 %>%
       select(Name, KEGG.ID, Condition, Exp, Amount, Av, Std, CV) %>%
@@ -131,14 +114,18 @@ data4 <- data4_archive
   }
   else
   {
+
     data4 <- data4 %>%
       select(Name, KEGG.ID, Condition, Exp, Amount, Av, Std, CV) %>%
       spread(Exp, Amount) %>%
       arrange(Name, Condition) %>%
       group_by(Name) %>%
-      mutate(RelAmounts_Ave = ifelse((Av[1]==0 | is.na(Av[1])), Av,  Av/Av[1]),
-             RelAmounts_Std = ifelse((Av[1]==0 | is.na(Av[1])), Std, Std/Av[1])) %>%
+      mutate(Av2 = ifelse((Av==0|is.na(Av)),NA,Av)) %>%
+      mutate(denom=min(Av2, na.rm = TRUE)) %>%
+      mutate(RelAmounts_Ave = Av/denom,
+             RelAmounts_Std = Std/denom) %>%
       ungroup()
+
   }
 
   if(output)
