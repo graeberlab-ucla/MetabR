@@ -69,8 +69,12 @@ RelAmounts <- function(DF, anova = F, type = 'NULL', output = F)
       arrange(Name, Condition) %>%
       cbind('ANOVA'=ANOVA, 'Sig'=NA) %>%
       group_by(Name) %>%
-      mutate(Norm_Av=Av/Av[1],
-             Norm_Std=Std/Av[1]) %>%
+      #mutate(Norm_Av=Av/Av[1],
+      #       Norm_Std=Std/Av[1]) %>%
+      mutate(Av2 = ifelse((Av==0|is.na(Av)),NA,Av)) %>%
+      mutate(denom=min(Av2, na.rm = TRUE)) %>%
+      mutate(Norm_Av  = Av/denom,
+             Norm_Std = Std/denom) %>%
       ungroup()
 
     for (i in 1:nrow(data4))
@@ -82,7 +86,7 @@ RelAmounts <- function(DF, anova = F, type = 'NULL', output = F)
       else data4$Sig[i]=""
     }
   }
-  else if(type == '250K')
+  else if(0 & type == '250K') #old block for 250K, but with edits the next block should be more universal
   {
     data4 <- data4 %>%
       select(Name, KEGG.ID, Condition, Exp, Amount, Av, Std, CV) %>%
@@ -116,8 +120,12 @@ RelAmounts <- function(DF, anova = F, type = 'NULL', output = F)
       spread(Exp, Amount) %>%
       arrange(Name, Condition) %>%
       group_by(Name) %>%
-      mutate(RelAmounts_Ave = Av/Av[1],
-             RelAmounts_Std = Std/Av[1]) %>%
+      #mutate(RelAmounts_Ave = Av/Av[1],
+      #       RelAmounts_Std = Std/Av[1]) %>%
+      mutate(Av2 = ifelse((Av==0|is.na(Av)),NA,Av)) %>%
+      mutate(denom=min(Av2, na.rm = TRUE)) %>%
+      mutate(RelAmounts_Ave = Av/denom,
+             RelAmounts_Std = Std/denom) %>%
       ungroup()
   }
 
