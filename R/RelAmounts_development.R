@@ -10,7 +10,6 @@
 #'
 #' @export
 
-
 RelAmounts <- function(DF, anova = F, type = 'NULL', output = F)
 {
   if (exists('Title')==F) stop('Title not specified')
@@ -70,6 +69,8 @@ RelAmounts <- function(DF, anova = F, type = 'NULL', output = F)
       arrange(Name, Condition) %>%
       cbind('ANOVA'=ANOVA, 'Sig'=NA) %>%
       group_by(Name) %>%
+      #mutate(Norm_Av=Av/Av[1],
+      #       Norm_Std=Std/Av[1]) %>%
       mutate(Av2 = ifelse((Av==0|is.na(Av)),NA,Av)) %>%
       mutate(denom=min(Av2, na.rm = TRUE)) %>%
       mutate(Norm_Av  = Av/denom,
@@ -114,18 +115,18 @@ RelAmounts <- function(DF, anova = F, type = 'NULL', output = F)
   }
   else
   {
-
     data4 <- data4 %>%
       select(Name, KEGG.ID, Condition, Exp, Amount, Av, Std, CV) %>%
       spread(Exp, Amount) %>%
       arrange(Name, Condition) %>%
       group_by(Name) %>%
+      #mutate(RelAmounts_Ave = Av/Av[1],
+      #       RelAmounts_Std = Std/Av[1]) %>%
       mutate(Av2 = ifelse((Av==0|is.na(Av)),NA,Av)) %>%
       mutate(denom=min(Av2, na.rm = TRUE)) %>%
       mutate(RelAmounts_Ave = Av/denom,
              RelAmounts_Std = Std/denom) %>%
       ungroup()
-
   }
 
   if(output)
