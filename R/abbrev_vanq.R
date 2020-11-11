@@ -4,9 +4,9 @@
 #'
 #' @docType data
 #'
-#' @usage data(abbrev_vanq)
+#' @usage data(Abbrev_vanq)
 #'
 #' @keywords datasets
 #'
 
-"abbrev_vanq"
+"Abbrev_vanq"

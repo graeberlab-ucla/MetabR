@@ -2,10 +2,10 @@ Package: MetabR
 Type: Package
 Title: Functions to assist in the current UCLA Metabolomics Quality Control and Analysis Pipeline. 
 Version: 0.1.0
-Author: Gerardo Javier, Daniel Tan, Jordan Uyeki
+Author: Gerardo Javier, Daniel Tan, Jordan Uyeki, Thomas Graeber
 Maintainer: Jordan Uyeki <juyeki@ucla.edu>
 Description: This package contains functions to assist in the current UCLA Metabolomics Pipeline. 
 LazyData: true
 imports: qdap, tidyverse, dplyr, data.table, tidyr, IsoCorrectoR, writexl, stringr, readr, plyr
-RoxygenNote: 7.1.1
 Encoding: UTF-8
+RoxygenNote: 7.1.1
