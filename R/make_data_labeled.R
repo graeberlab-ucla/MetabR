@@ -17,9 +17,12 @@ make_data_labeled <- function(DF)
   if (exists('Title')==F) stop('Title not specified')
   data_labeled <- DF %>%
     select(Name, KEGG.ID, Condition, Iso, starts_with('MID')) %>%
-    filter(Iso=='M0') %>%
     gather(Exp, Value, -Name, -KEGG.ID, -Condition, -Iso) %>%
-    mutate(Labeled=(1-Value/100)*100) %>%
+    group_by(Name, Condition, Exp) %>%
+    mutate(Sum = sum(Value)) %>%
+    ungroup %>%
+    filter(Iso=='M0') %>%
+    mutate(Labeled=ifelse(Sum>0,(1-Value/100)*100,NA)) %>%
     group_by(Name, Condition) %>%
     mutate(Norm_Av=mean(Labeled, na.rm=T),
            Norm_Std=sd(Labeled, na.rm=T),
@@ -27,6 +30,7 @@ make_data_labeled <- function(DF)
            Av = Norm_Av) %>%
     select(-Iso, -Value) %>%
     ungroup()
+  data_labeled$Sum <- NULL
   data_labeled$Exp <- gsub('MID','Labeled', data_labeled$Exp)
   test1 <- split(data_labeled, data_labeled[c('Name', 'Condition')])
   NA_function <- function(x) if (sum(is.na(x)) < length(x)) return(x=x) else return(x=rep(0, length(x)))
