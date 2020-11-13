@@ -1,3 +1,19 @@
+#' @title Functions to assist in the current UCLA Metabolomics Pipeline.
+#'
+#' @description This package contains functions to assist in the current UCLA Metabolomics Quality Control and Analysis Pipeline. Called by bar_update_manual. Finalizes the a page of plots of the relative amounts of the different metabolites that are part of the specified defined pathway.
+#'
+#' @param a the initial ggplot object
+#' @param met a data frame containing the relative amounts of the different metabolites in the experiment
+#' @param Title title
+#' @param axis.text.x
+#' @param scales parameter passed to ggplot for the facet_wrap vertical axis scale ('free', 'fixed), from ggplot: Are scales shared across all facets (the default, "fixed"), or do they vary across rows ("free_x"), columns ("free_y"), or both rows and columns ("free").
+#' @param num_cond the number of conditions in the experiment
+#' @param type the type of analysis or quality control being run ('tf', '')
+#'
+#' @return a plot of the relative amounts of a specific metabolites that are part of the specified defined pathway (based on the 'metabolites' parameter in bar_update_manual.R)
+#'
+#' @examples bar_plot_update_manual(a, met, Title, x, y, axis.text.x, scales='free', num_cond = n, type = "tf")
+#'
 #' @export
 #'
 bar_plot_update_manual <- function(a, met, Title, x, y, axis.text.x, scales, type = NULL, num_cond=NULL,index=NULL)
@@ -30,7 +46,7 @@ bar_plot_update_manual <- function(a, met, Title, x, y, axis.text.x, scales, typ
     }
     col <- res
   }
-  
+
 
     a + geom_bar(position="dodge", stat="identity", width=0.9) +
       geom_bar(aes(linetype=under_50_percent,color = under_50_percent, size=under_50_percent),position="dodge", stat="identity", width=0.9) +
@@ -50,5 +66,5 @@ bar_plot_update_manual <- function(a, met, Title, x, y, axis.text.x, scales, typ
         panel.grid.major=element_blank()) +
       geom_errorbar(aes(ymin=RelAmounts_Ave, ymax=RelAmounts_Ave+RelAmounts_Std), position=position_dodge(0.9), width=.2)+
       scale_fill_manual(values = col)
-  
+
 }
