@@ -35,6 +35,7 @@ bar_plot_update_manual <- function(a, met, Title, x, y, axis.text.x, scales, typ
         res <- c(res, "grey45")
       else if (i %in% index[[4]]){
         res <- c(res, "darkorange1")
+      }
       else if(i %in% index[[3]])
       {
         res <- c(res, extra_qc[k])
