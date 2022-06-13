@@ -8,4 +8,4 @@ Description: This package contains functions to assist in the current UCLA Metab
 LazyData: true
 imports: qdap, tidyverse, dplyr, data.table, tidyr, IsoCorrectoR, writexl, stringr, readr, plyr
 Encoding: UTF-8
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
