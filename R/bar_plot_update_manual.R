@@ -26,8 +26,6 @@ bar_plot_update_manual <- function(a, met, Title, x, y, axis.text.x, scales, typ
     j  <- 1
     k <- 1
     extra_qc <- c("peachpuff1", "seashell1", "wheat2", "snow1")
-    pool_colors <- c("darkorange1", "royalblue", "lemonchiffon1")
-    pools_num <- 1
     res <- vector()
     for( i in 1:num_cond)
     {
@@ -36,8 +34,7 @@ bar_plot_update_manual <- function(a, met, Title, x, y, axis.text.x, scales, typ
       else if(i %in% index[[2]])
         res <- c(res, "grey45")
       else if (i %in% index[[4]]){
-        res <- c(res, pool_colors[pools_num])
-        pools_num <- pools_num + 1}
+        res <- c(res, "darkorange1")
       else if(i %in% index[[3]])
       {
         res <- c(res, extra_qc[k])
