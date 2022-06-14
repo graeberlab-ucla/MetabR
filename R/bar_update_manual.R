@@ -115,6 +115,10 @@ bar_update_manual <- function(metabolites, df, repeats, n, type,index = NULL, ti
   {
     metabolites <- Neurotrans
     ending <- 'Neurotransmitter levels'
+  }else if (metabolites=='Custom')
+  {
+    metabolites = Custom
+    ending <- 'Custom metabolites'
   }
   else ending = ''
 
