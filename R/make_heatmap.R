@@ -1,19 +1,3 @@
-#' @title Functions to assist in the current UCLA Metabolomics Pipeline.
-#'
-#' @description This package contains functions to assist in the current UCLA Metabolomics Quality Control and Analysis Pipeline.
-#'
-#' @param A dataframe containing the relative amounts data, a data frame with information on the samples, and the heatmap color scheme. cluster_samples is an optional parameter (default is TRUE) that indicates whether or not the samples are to be clustered. Height and width are optional parameters indicating dimensions of pdf output.
-#'
-#' @return An annotated heatmap in a pdf file.
-#'
-#' @examples make_heatmap(matrix = RelA, samples = samples, heat.color = normal, to_cluster = FALSE, width = 8, height = 5)
-#'
-#' @export
-#'
-#'
-#'
-
-
 make_heatmap2 <- function (matrix, samples = samples, heat.color = normal, cluster_samples = TRUE, width = NA, height = NA) 
 {
   if (gsub("(.)*_|[0-9]", "", colnames(matrix))[1] == "Exp") {
@@ -72,12 +56,12 @@ make_heatmap2 <- function (matrix, samples = samples, heat.color = normal, clust
                        filename = heatmap.title, width = width, height = height)
     
     #pheatmap::pheatmap(matrix, cluster_row = T, cluster_col = cluster_samples, 
-    #clustering_distance_rows = "correlation", clustering_distance_cols = "correlation", 
-    #color = colorRampPalette(heat.color)(100), border_color = "black", 
-    #scale = "row", cellwidth = 20, cellheight = 10, 
-    #annotation = ann, annotation_colors = ann_colors, 
-    #show_colnames = F, main = paste(Title, ext, sep = "-"), 
-    #filename = heatmap.title, width = width, height = height)
+                       #clustering_distance_rows = "correlation", clustering_distance_cols = "correlation", 
+                       #color = colorRampPalette(heat.color)(100), border_color = "black", 
+                       #scale = "row", cellwidth = 20, cellheight = 10, 
+                       #annotation = ann, annotation_colors = ann_colors, 
+                       #show_colnames = F, main = paste(Title, ext, sep = "-"), 
+                       #filename = heatmap.title, width = width, height = height)
   }
   #dev.off()
 }
