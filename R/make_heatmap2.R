@@ -1,3 +1,16 @@
+#' Title
+#'
+#' @param matrix 
+#' @param samples 
+#' @param heat.color 
+#' @param cluster_samples 
+#' @param width 
+#' @param height 
+#'
+#' @return
+#' @export
+#'
+#' @examples
 make_heatmap2 <- function (matrix, samples = samples, heat.color = normal, cluster_samples = TRUE, width = NA, height = NA) 
 {
   if (gsub("(.)*_|[0-9]", "", colnames(matrix))[1] == "Exp") {
@@ -56,12 +69,12 @@ make_heatmap2 <- function (matrix, samples = samples, heat.color = normal, clust
                        filename = heatmap.title, width = width, height = height)
     
     #pheatmap::pheatmap(matrix, cluster_row = T, cluster_col = cluster_samples, 
-                       #clustering_distance_rows = "correlation", clustering_distance_cols = "correlation", 
-                       #color = colorRampPalette(heat.color)(100), border_color = "black", 
-                       #scale = "row", cellwidth = 20, cellheight = 10, 
-                       #annotation = ann, annotation_colors = ann_colors, 
-                       #show_colnames = F, main = paste(Title, ext, sep = "-"), 
-                       #filename = heatmap.title, width = width, height = height)
+    #clustering_distance_rows = "correlation", clustering_distance_cols = "correlation", 
+    #color = colorRampPalette(heat.color)(100), border_color = "black", 
+    #scale = "row", cellwidth = 20, cellheight = 10, 
+    #annotation = ann, annotation_colors = ann_colors, 
+    #show_colnames = F, main = paste(Title, ext, sep = "-"), 
+    #filename = heatmap.title, width = width, height = height)
   }
   #dev.off()
 }
