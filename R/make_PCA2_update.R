@@ -54,9 +54,9 @@ make_PCA2_update <- function(matrix, a=1, b=2, cutoff = 0.5)
                        par.settings=list(superpose.symbol=list(col=colors, pch=19)),
                        auto.key=list(columns=4), pch=19))
 
-  plot <- ggplot(PC, aes(PC[,a], PC[,b], fill=Condition, label = Sample.Name))+
-    geom_text_repel(color='black', fontface='bold', size=2.5, vjust=-0.2, point.padding = .3)+
-    geom_point(size=3, shape=21, color='black')+
+  plot <- ggplot(PC, aes(PC[,a], PC[,b], label = Sample.Name),col=Condition)+
+    geom_label_repel(color='black', fontface='bold', size=2.5, point.padding = .3,label.size = NA,segment.alpha = 0.6) +
+    geom_point(size=3, shape=21, aes(fill=Condition))+
     labs(x=paste('PC',a, ' (',var_PCs[a],'%)',sep=''), y=paste('PC',b, ' (',var_PCs[b],'%)',sep=''), title=paste('PC',a,' vs. PC',b,': All samples', sep=''))+
     theme_bw()+
     theme(panel.grid.major=element_blank(),
@@ -65,7 +65,7 @@ make_PCA2_update <- function(matrix, a=1, b=2, cutoff = 0.5)
 
   CCP_plot <- filter(CCP, Corr >= cutoff) %>%
     ggplot(., aes(.[,a], .[,b], label=Metabolite))+
-    geom_text_repel(aes(label=Metabolite, fontface=2),size=2.5,point.padding=.3,color="navy", segment.color = "grey", segment.alpha = 0.6)+
+    geom_text_repel(aes(label=Metabolite, fontface=2),size=2.5,point.padding=.3,color="navy", min.segment.length= 0.1, segment.color = "grey", segment.alpha = 0.6)+
     geom_point(size=2, color='black')+
     #  geom_text(vjust=-1, color='navy', size=3)+
     labs(x=paste('PC',a, ' (',var_PCs[a],'%)',sep=''),
@@ -74,8 +74,9 @@ make_PCA2_update <- function(matrix, a=1, b=2, cutoff = 0.5)
     theme_bw()+
     theme(panel.grid.major=element_blank(),
           text = element_text(face='bold'))+
-    xlim(-1,1)+
-    ylim(-1,1)
+    xlim(min(CCP$PC1),max(CCP$PC1))+
+    ylim(min(CCP$PC2),max(CCP$PC2))
+
 
   gridExtra::grid.arrange(plot, CCP_plot, nrow=1)
   dev.off()
