@@ -2,12 +2,12 @@
 #' @description This package contains functions to assist in the current UCLA Metabolomics Quality Control and Analysis Pipeline.
 #' @param metabolites list of metabolites used to run experiment
 #' @param df amounts3 or amounts
-#' @param repeats 
+#' @param repeats
 #' @param n n = num_conditions
 #' @param type type = "tf" or other
-#' @param index 
-#' @param title_type 
-#' @param only_M0 
+#' @param index
+#' @param title_type
+#' @param only_M0
 #' @param mediumtitle mediumtitle="Plots-Relative-To-Fresh"
 #' @param color_lst m_ind<-which(!grepl("unspent|[Bb]lank|[Ff]resh|[Cc]ontrol|[Mm]edium|[Mm]edia",unique(amounts$Condition)))   amounts3_colors<- colors1[m_ind]
 #'
@@ -15,8 +15,8 @@
 #' @export
 #'
 #' @examples full_medium_plot_func(unname(unlist(lst)),a, n = num_conditions, type = "tf", title_type = "medium", mediumtitle="Plots-Relative-To-Fresh", color_lst=amounts3_colors)
-#' 
-full_medium_plot_func<-function (metabolites, df, repeats, n, type=NULL, index = NULL, title_type, 
+#'
+full_medium_plot_func<-function (metabolites, df, repeats, n, type=NULL, index = NULL, title_type,
                              only_M0 = NA,  mediumtitle=NULL,color_lst=NULL)
 {
   if (length(metabolites) > 1) {
@@ -42,16 +42,16 @@ full_medium_plot_func<-function (metabolites, df, repeats, n, type=NULL, index =
     if (type == "tf") {
       met = subset(df, Name %in% metabolites)
       stopifnot(length(unique(met$Name)) >= 1)
-      met <- mutate(met, Name = paste(Name, Sig, sep = " "), 
+      met <- mutate(met, Name = paste(Name, Sig, sep = " "),
                     Sig = "")
       Title = paste0("Relative amounts of ", ending, " (not corrected for blank values)")
       if(!is.null(mediumtitle)) Title<-mediumtitle
       x = ""
       y = "Relative Amounts"
-      a <- ggplot(met, aes(Condition, RelAmounts_Ave, 
+      a <- ggplot(met, aes(Condition, RelAmounts_Ave,
                            group = Condition, fill = Condition, label = Sig))
       axis.text.x = element_blank()
-     
+
     }
     else {
       met = subset(df, Name %in% metabolites)
@@ -60,15 +60,15 @@ full_medium_plot_func<-function (metabolites, df, repeats, n, type=NULL, index =
       if(!is.null(mediumtitle)) Title<-mediumtitle
       x = ""
       y = "Relative Amounts"
-      a <- ggplot(met, aes(Condition, RelAmounts_Ave, 
+      a <- ggplot(met, aes(Condition, RelAmounts_Ave,
                            group = Condition, fill = Condition, label = Name))
       axis.text.x = element_blank()
     }
   }
-  
+
   scales = "free"
    num_cond=n
-    
+
     if(is.null(color_lst)){
       color_lst<-c("turquoise","red","plum4","steelblue1","red4","springgreen2","slateblue2","sienna1","darkgreen","lightpink1","navy","olivedrab1",
              "orangered","darkslateblue","lightseagreen","magenta2","royalblue","yellowgreen","lightsalmon","cyan","maroon1","indianred3","mediumseagreen",
@@ -76,7 +76,7 @@ full_medium_plot_func<-function (metabolites, df, repeats, n, type=NULL, index =
     }else{
       color_lst<-color_lst
     }
-  
+
     if(!is.null(index))
     {
       j  <- 1
@@ -102,11 +102,11 @@ full_medium_plot_func<-function (metabolites, df, repeats, n, type=NULL, index =
       }
       color_lst <- res
     }
-    
-  
+
+
     a + geom_bar(position="dodge", stat="identity", width=0.9) +
       geom_bar(aes(linetype=under_50_percent,color = under_50_percent, size=under_50_percent),position="dodge", stat="identity", width=0.9) +
-      guides(linetype='none') +
+      guides(linetype='none',fill=guide_legend(ncol=1))+
        scale_size_manual(values=c(0.3,0.8), guide = 'none') +
        scale_colour_manual(values = c("black", "gray29"), guide = 'none') +
       facet_wrap( ~ Name, scales=scales) +
@@ -123,6 +123,6 @@ full_medium_plot_func<-function (metabolites, df, repeats, n, type=NULL, index =
         panel.grid.major=element_blank()) +
       geom_errorbar(aes(ymin=RelAmounts_Ave, ymax=RelAmounts_Ave+RelAmounts_Std), position=position_dodge(0.9), width=.2) +
       scale_fill_manual(values = color_lst)
-    # 
+    #
   }
-  
+
