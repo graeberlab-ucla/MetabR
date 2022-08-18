@@ -44,10 +44,10 @@ full_medium_plot_func<-function (metabolites, df, repeats, n, type=NULL, index =
       stopifnot(length(unique(met$Name)) >= 1)
       met <- mutate(met, Name = paste(Name, Sig, sep = " "),
                     Sig = "")
-      Title = paste0("Relative amounts of ", ending, " (not corrected for blank values)")
+      Title = paste0("Amounts of ", ending, " (not corrected for blank values)")
       if(!is.null(mediumtitle)) Title<-mediumtitle
       x = ""
-      y = "Relative Amounts"
+      y = "Amounts"
       a <- ggplot(met, aes(Condition, RelAmounts_Ave,
                            group = Condition, fill = Condition, label = Sig))
       axis.text.x = element_blank()
@@ -56,10 +56,10 @@ full_medium_plot_func<-function (metabolites, df, repeats, n, type=NULL, index =
     else {
       met = subset(df, Name %in% metabolites)
       stopifnot(length(unique(met$Name)) >= 1)
-      Title = paste0("Relative amounts of ", ending)
+      Title = paste0("Amounts of ", ending)
       if(!is.null(mediumtitle)) Title<-mediumtitle
       x = ""
-      y = "Relative Amounts"
+      y = "Amounts"
       a <- ggplot(met, aes(Condition, RelAmounts_Ave,
                            group = Condition, fill = Condition, label = Name))
       axis.text.x = element_blank()
