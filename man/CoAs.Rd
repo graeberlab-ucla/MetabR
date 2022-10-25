@@ -4,7 +4,9 @@
 \name{CoAs}
 \alias{CoAs}
 \title{A character vector of co-enzyme A-related compounds.}
-\format{A character vector of length 9.}
+\format{
+A character vector of length 9.
+}
 \usage{
 CoAs
 }

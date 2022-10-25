@@ -4,7 +4,9 @@
 \name{FA}
 \alias{FA}
 \title{A character vector of fatty acid-related compounds.}
-\format{A character vector of length 11.}
+\format{
+A character vector of length 11.
+}
 \usage{
 FA
 }

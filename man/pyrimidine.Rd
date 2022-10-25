@@ -4,7 +4,9 @@
 \name{pyrimidine}
 \alias{pyrimidine}
 \title{A character vector of pyrimidine metabolism compounds.}
-\format{A character vector of length 7.}
+\format{
+A character vector of length 7.
+}
 \usage{
 pyrimidine
 }

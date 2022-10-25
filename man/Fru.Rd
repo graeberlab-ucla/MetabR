@@ -4,7 +4,9 @@
 \name{Fru}
 \alias{Fru}
 \title{A character vector of fructose metabolism compounds.}
-\format{A character vector of length 9.}
+\format{
+A character vector of length 9.
+}
 \usage{
 Fru
 }

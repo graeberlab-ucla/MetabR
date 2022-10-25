@@ -4,7 +4,9 @@
 \name{compounds}
 \alias{compounds}
 \title{A data frame of 18042 KEGG compounds.}
-\format{A data frame of 18042 rows and 4 variables.}
+\format{
+A data frame of 18042 rows and 4 variables.
+}
 \usage{
 compounds
 }

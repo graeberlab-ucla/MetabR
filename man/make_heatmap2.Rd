@@ -26,9 +26,6 @@ make_heatmap2(
 
 \item{height}{}
 }
-\value{
-
-}
 \description{
 Title
 }

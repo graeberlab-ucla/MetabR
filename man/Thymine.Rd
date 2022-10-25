@@ -4,7 +4,9 @@
 \name{Thymine}
 \alias{Thymine}
 \title{A character vector of thymine metabolism compounds.}
-\format{A character vector of length 5.}
+\format{
+A character vector of length 5.
+}
 \usage{
 Thymine
 }

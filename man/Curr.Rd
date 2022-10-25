@@ -4,7 +4,9 @@
 \name{Curr}
 \alias{Curr}
 \title{A character vector of currency metabolites.}
-\format{A character vector of length 16.}
+\format{
+A character vector of length 16.
+}
 \usage{
 Curr
 }

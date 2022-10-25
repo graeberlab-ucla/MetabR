@@ -16,24 +16,9 @@ Maven_MID_plot(
 )
 }
 \arguments{
-\item{metabolites}{}
-
-\item{df}{}
-
-\item{repeats}{}
-
 \item{n}{number of conditions}
 
-\item{type}{}
-
-\item{index}{}
-
-\item{title_type}{}
-
 \item{only_M0}{}
-}
-\value{
-
 }
 \description{
 Maven_MID_plot

@@ -9,12 +9,6 @@ plot_istd(Std, info, title, pdf_width = 14)
 \arguments{
 \item{Std}{A dataframe}
 }
-\value{
-
-}
 \description{
 This package contains functions to assist in the current UCLA Metabolomics Quality Control and Analysis Pipeline.
-}
-\examples{
-
 }

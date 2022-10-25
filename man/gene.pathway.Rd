@@ -5,7 +5,9 @@
 \alias{gene.pathway}
 \title{A data frame of genes associated with 319 KEGG pathways. This data frame is useful for
 gene set enrichment analysis if reshaped.}
-\format{A data frame of 25580 rows and 8 variables.}
+\format{
+A data frame of 25580 rows and 8 variables.
+}
 \usage{
 gene.pathway
 }

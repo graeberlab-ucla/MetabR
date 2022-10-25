@@ -6,7 +6,9 @@
 \title{A data frame with compound information for 15710 from the KEGG database as well as 41500 HMDB
 compounds. The compounds are overlapping and also include calculated mass-to-charge values for 111
 salt clusters.}
-\format{A data frame of 6294970 rows and 12 variables.}
+\format{
+A data frame of 6294970 rows and 12 variables.
+}
 \usage{
 CompMZ
 }

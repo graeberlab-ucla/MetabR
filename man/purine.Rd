@@ -4,7 +4,9 @@
 \name{purine}
 \alias{purine}
 \title{A character vector of purine metabolism compounds.}
-\format{A character vector of length 7.}
+\format{
+A character vector of length 7.
+}
 \usage{
 purine
 }

@@ -4,7 +4,9 @@
 \name{Cys}
 \alias{Cys}
 \title{A character vector of cysteine metabolism compounds.}
-\format{A character vector of length 11.}
+\format{
+A character vector of length 11.
+}
 \usage{
 Cys
 }

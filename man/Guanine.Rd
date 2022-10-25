@@ -4,7 +4,9 @@
 \name{Guanine}
 \alias{Guanine}
 \title{A character vector of guanine metabolism compounds.}
-\format{A character vector of length 8.}
+\format{
+A character vector of length 8.
+}
 \usage{
 Guanine
 }

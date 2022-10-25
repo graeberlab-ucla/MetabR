@@ -4,7 +4,9 @@
 \name{KEGG.pathway}
 \alias{KEGG.pathway}
 \title{A data frame with 514 KEGG pathways and their corresponding IDs.}
-\format{A data frame with 514 rows and 2 variables.}
+\format{
+A data frame with 514 rows and 2 variables.
+}
 \usage{
 KEGG.pathway
 }

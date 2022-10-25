@@ -4,7 +4,9 @@
 \name{PPP}
 \alias{PPP}
 \title{A character vector of pentose phosphate metabolism compounds.}
-\format{A character vector of length 14.}
+\format{
+A character vector of length 14.
+}
 \usage{
 PPP
 }

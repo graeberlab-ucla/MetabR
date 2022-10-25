@@ -4,7 +4,9 @@
 \name{Adenine}
 \alias{Adenine}
 \title{A character vector of adenine-related compounds.}
-\format{A character vector of length 13.}
+\format{
+A character vector of length 13.
+}
 \usage{
 Adenine
 }

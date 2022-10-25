@@ -4,7 +4,9 @@
 \name{QE}
 \alias{QE}
 \title{A character vector of compounds to be used as MID inputs for INCA.}
-\format{A character vector of length 12.}
+\format{
+A character vector of length 12.
+}
 \usage{
 QE
 }

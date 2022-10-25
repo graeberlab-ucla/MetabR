@@ -4,7 +4,9 @@
 \name{AA}
 \alias{AA}
 \title{A character vector of amino acids.}
-\format{A character vector of length 22.}
+\format{
+A character vector of length 22.
+}
 \usage{
 AA
 }

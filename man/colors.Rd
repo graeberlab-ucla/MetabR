@@ -4,7 +4,9 @@
 \name{colors}
 \alias{colors}
 \title{A character vector of commonly used colors.}
-\format{A character vector of length 18.}
+\format{
+A character vector of length 18.
+}
 \usage{
 colors
 }

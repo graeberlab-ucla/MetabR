@@ -4,7 +4,9 @@
 \name{glycolysis}
 \alias{glycolysis}
 \title{A character vector of glycolysis compounds.}
-\format{A character vector of length 26.}
+\format{
+A character vector of length 26.
+}
 \usage{
 glycolysis
 }

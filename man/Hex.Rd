@@ -4,7 +4,9 @@
 \name{Hex}
 \alias{Hex}
 \title{A character vector of hexose metabolism compounds.}
-\format{A character vector of length 8.}
+\format{
+A character vector of length 8.
+}
 \usage{
 Hex
 }

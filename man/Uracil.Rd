@@ -4,7 +4,9 @@
 \name{Uracil}
 \alias{Uracil}
 \title{A character vector of uracil metabolism compounds.}
-\format{A character vector of length 7.}
+\format{
+A character vector of length 7.
+}
 \usage{
 Uracil
 }

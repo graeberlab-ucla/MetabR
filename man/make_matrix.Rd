@@ -13,9 +13,6 @@ make_matrix(MS_data, Type, anova = 0.05)
 
 \item{anova}{A cutoff value: usually a p-value of some sort}
 }
-\value{
-
-}
 \description{
 This function produces a matrix for hierarchical clustering or PCA
 }

@@ -4,7 +4,9 @@
 \name{normal}
 \alias{normal}
 \title{A character vector of colors used in heatmaps.}
-\format{A character vector of length 3.}
+\format{
+A character vector of length 3.
+}
 \usage{
 normal
 }

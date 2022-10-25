@@ -22,17 +22,9 @@ full_medium_plot_func(
 
 \item{df}{amounts3 or amounts}
 
-\item{repeats}{}
-
 \item{n}{n = num_conditions}
 
 \item{type}{type = "tf" or other}
-
-\item{index}{}
-
-\item{title_type}{}
-
-\item{only_M0}{}
 
 \item{mediumtitle}{mediumtitle="Plots-Relative-To-Fresh"}
 

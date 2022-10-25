@@ -4,7 +4,9 @@
 \name{TCA}
 \alias{TCA}
 \title{A character vector of Tricarboxylic acid (TCA) metabolism compounds.}
-\format{A character vector of length 14.}
+\format{
+A character vector of length 14.
+}
 \usage{
 TCA
 }

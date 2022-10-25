@@ -4,7 +4,9 @@
 \name{Neurotrans}
 \alias{Neurotrans}
 \title{A character vector of neurotransmitter compounds.}
-\format{A character vector of length 5.}
+\format{
+A character vector of length 5.
+}
 \usage{
 Neurotrans
 }

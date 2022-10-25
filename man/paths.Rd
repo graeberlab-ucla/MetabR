@@ -4,7 +4,9 @@
 \name{paths}
 \alias{paths}
 \title{A list with all information for 319 KEGG pathways.}
-\format{A character vector of length 7.}
+\format{
+A character vector of length 7.
+}
 \usage{
 paths
 }
