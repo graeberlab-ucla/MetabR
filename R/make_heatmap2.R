@@ -1,18 +1,19 @@
 #' Title
 #'
-#' @param matrix 
-#' @param samples 
-#' @param heat.color 
-#' @param cluster_samples 
-#' @param width 
-#' @param height 
+#' @param matrix
+#' @param samples
+#' @param heat.color
+#' @param cluster_samples
+#' @param width
+#' @param height
 #'
 #' @return
 #' @export
 #'
 #' @examples
-make_heatmap2 <- function (matrix, samples = samples, heat.color = normal, cluster_samples = TRUE, width = NA, height = NA) 
+make_heatmap2 <- function (matrix, samples = samples, heat.color = normal, cluster_samples = TRUE, width = NA, height = NA, ext=NA)
 {
+  if(is.na(ext)){
   if (gsub("(.)*_|[0-9]", "", colnames(matrix))[1] == "Exp") {
     ext = "Relative Amounts"
   } else if (gsub("(.)*_|[0-9]", "", colnames(matrix))[1] == "MID") {
@@ -22,7 +23,8 @@ make_heatmap2 <- function (matrix, samples = samples, heat.color = normal, clust
   } else if (gsub("(.)*_|[0-9]", "", colnames(matrix))[1] == "Labeled") {
     ext = "Percent Labeled"
   }
-  if (exists("samples") == F) 
+  }
+  if (exists("samples") == F)
     samples <- info
   ann <- select(samples, Condition, Cell.Number) %>% as.data.frame()
   rownames(ann) <- colnames(matrix)
@@ -38,20 +40,20 @@ make_heatmap2 <- function (matrix, samples = samples, heat.color = normal, clust
       Cell.Number = c("white", "green"))
     ann$Norvaline <- Norv
   }
-  names(ann_colors[["Condition"]]) <- unique(gsub("_(.)*", 
+  names(ann_colors[["Condition"]]) <- unique(gsub("_(.)*",
                                                   "", colnames(matrix)))
   matrix[is.na(matrix)] <- 0
   heatmap.title = paste(Title, "-Heatmap-", ext, ".pdf", sep = "")
-  if (cluster_samples == F) 
-    heatmap.title = paste(Title, "-Heatmap-", ext, "-Unclustered", 
+  if (cluster_samples == F)
+    heatmap.title = paste(Title, "-Heatmap-", ext, "-Unclustered",
                           ".pdf", sep = "")
   if (is.na(width) & is.na(height)) {
-    pheatmap::pheatmap(matrix, cluster_row = T, cluster_col = cluster_samples, 
-                       clustering_distance_rows = "correlation", clustering_distance_cols = "correlation", 
-                       color = colorRampPalette(heat.color)(100), border_color = "black", 
-                       scale = "row", cellwidth = 20, cellheight = 10, 
-                       annotation = ann, annotation_colors = ann_colors, 
-                       show_colnames = F, main = paste(Title, ext, sep = "-"), 
+    pheatmap::pheatmap(matrix, cluster_row = T, cluster_col = cluster_samples,
+                       clustering_distance_rows = "correlation", clustering_distance_cols = "correlation",
+                       color = colorRampPalette(heat.color)(100), border_color = "black",
+                       scale = "row", cellwidth = 20, cellheight = 10,
+                       annotation = ann, annotation_colors = ann_colors,
+                       show_colnames = F, main = paste(Title, ext, sep = "-"),
                        filename = heatmap.title)
   }else {
     ### Added code to remove rows with zero variance
@@ -62,18 +64,18 @@ make_heatmap2 <- function (matrix, samples = samples, heat.color = normal, clust
     ### Changed matrix to matrix_filt
     pheatmap::pheatmap(matrix_filt, cluster_row = T, cluster_col = cluster_samples
                        ,clustering_distance_rows = "correlation", clustering_distance_cols = "correlation",
-                       color = colorRampPalette(heat.color)(100), border_color = "black", 
-                       scale = "row", cellwidth = 20, cellheight = 10, 
-                       annotation = ann, annotation_colors = ann_colors, 
-                       show_colnames = F, main = paste(Title, ext, sep = "-"), 
+                       color = colorRampPalette(heat.color)(100), border_color = "black",
+                       scale = "row", cellwidth = 20, cellheight = 10,
+                       annotation = ann, annotation_colors = ann_colors,
+                       show_colnames = F, main = paste(Title, ext, sep = "-"),
                        filename = heatmap.title, width = width, height = height)
-    
-    #pheatmap::pheatmap(matrix, cluster_row = T, cluster_col = cluster_samples, 
-    #clustering_distance_rows = "correlation", clustering_distance_cols = "correlation", 
-    #color = colorRampPalette(heat.color)(100), border_color = "black", 
-    #scale = "row", cellwidth = 20, cellheight = 10, 
-    #annotation = ann, annotation_colors = ann_colors, 
-    #show_colnames = F, main = paste(Title, ext, sep = "-"), 
+
+    #pheatmap::pheatmap(matrix, cluster_row = T, cluster_col = cluster_samples,
+    #clustering_distance_rows = "correlation", clustering_distance_cols = "correlation",
+    #color = colorRampPalette(heat.color)(100), border_color = "black",
+    #scale = "row", cellwidth = 20, cellheight = 10,
+    #annotation = ann, annotation_colors = ann_colors,
+    #show_colnames = F, main = paste(Title, ext, sep = "-"),
     #filename = heatmap.title, width = width, height = height)
   }
   #dev.off()
