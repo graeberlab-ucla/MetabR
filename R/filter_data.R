@@ -6,7 +6,7 @@
 #'
 #' @return A dataframe of the filtered data. Or if type = 'QC', a vector of the isotopologues to be filtered.
 #'
-#' @examples filter_data(data = data, info = info, type = 'QC')
+# @examples filter_data(data = data, info = info, type = 'QC')
 #'
 #' @export
 #'

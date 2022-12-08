@@ -6,7 +6,7 @@
 #'
 #' @return a new data frame with data reformatted
 #'
-#' @examples maven_processing(maven_raw)
+# @examples maven_processing(maven_raw)
 #'
 #' @export
 #'

@@ -1,11 +1,26 @@
-Package: MetabR
 Type: Package
-Title: Functions to assist in the current UCLA Metabolomics Quality Control and Analysis Pipeline. 
+Package: MetabR
+Title: MetabR: UCLA Metabolomics QC Analysis Pipeline
 Version: 0.1.0
-Author: Gerardo Javier, Daniel Tan, Jordan Uyeki, Thomas Graeber
-Maintainer: Jordan Uyeki <juyeki@ucla.edu>
-Description: This package contains functions to assist in the current UCLA Metabolomics Pipeline. 
-LazyData: true
-imports: qdap, tidyverse, dplyr, data.table, tidyr, IsoCorrectoR, writexl, stringr, readr, plyr
+Description: Functions to assist in the current UCLA Metabolomics Quality
+    Control and Analysis Pipeline.
+License: file LICENSE
+Authors@R: c(
+    person("Thomas", "Graeber", email = "tgraeber@mednet.ucla.edu", role = c("aut","cre")),
+    person("Graeber Lab", role = c("cph")),
+    person("Gerardo", "Javier", role = "aut"),
+    person("Daniel", "Tan", role = "aut"),
+    person("Jordan", "Uyeki", role = "aut"),
+    person("Alexzandra", "Morris", role = "aut"),
+    person("Ashvath", "Balgovind", role = "aut"),
+    person("Yi Jou (Ruby)", "Liao", role = "aut"))
 Encoding: UTF-8
-RoxygenNote: 7.2.1
+imports: qdap, tidyverse, dplyr, data.table, tidyr, IsoCorrectoR, writexl,
+    stringr, readr, plyr
+LazyData: true
+RoxygenNote: 7.2.2
+Imports: 
+    dplyr,
+    magrittr,
+    readxl,
+    xlsx

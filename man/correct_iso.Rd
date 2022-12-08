@@ -15,7 +15,3 @@ isotopomer dataframe with a column for corrected values.
 \description{
 This package contains functions to assist in the current UCLA Metabolomics Quality Control and Analysis Pipeline.
 }
-\examples{
-correct_iso(isotopomer_df, "C","C")
-
-}

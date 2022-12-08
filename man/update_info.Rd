@@ -15,7 +15,3 @@ An updated excel sheet with sample run orders and the quality control blanks, 25
 \description{
 This package contains functions to assist in the current UCLA Metabolomics Quality Control and Analysis Pipeline.
 }
-\examples{
-update_info(info_dir = "/Users/juyeki/lab_folder")
-
-}

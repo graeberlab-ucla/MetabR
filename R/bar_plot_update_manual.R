@@ -12,7 +12,7 @@
 #'
 #' @return a plot of the relative amounts of a specific metabolites that are part of the specified defined pathway (based on the 'metabolites' parameter in bar_update_manual.R)
 #'
-#' @examples bar_plot_update_manual(a, met, Title, x, y, axis.text.x, scales='free', num_cond = n, type = "tf")
+# @examples bar_plot_update_manual(a, met, Title, x, y, axis.text.x, scales='free', num_cond = n, type = "tf")
 #'
 #' @export
 #'

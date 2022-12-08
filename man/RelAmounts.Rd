@@ -15,7 +15,3 @@ a data frame that is in the correct format for the bar_update_manual function to
 \description{
 This package contains functions to assist in the current UCLA Metabolomics Quality Control and Analysis Pipeline.
 }
-\examples{
-my_make_RelAmounts_QC(data2, anova = TRUE, type = '250K')
-
-}

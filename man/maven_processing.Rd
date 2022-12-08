@@ -15,7 +15,3 @@ a new data frame with data reformatted
 \description{
 This package contains functions to assist in the current UCLA Metabolomics Quality Control and Analysis Pipeline.
 }
-\examples{
-maven_processing(maven_raw)
-
-}

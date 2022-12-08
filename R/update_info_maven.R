@@ -5,9 +5,9 @@
 #'
 #' @param The path to the original information excel sheet of the analysis.
 #'
-#' @return An updated excel sheet with sample run orders and the quality control blanks, 250ks, pools, and samples. Used for Maven only. 
+#' @return An updated excel sheet with sample run orders and the quality control blanks, 250ks, pools, and samples. Used for Maven only.
 #'
-#' @examples update_info(info_dir = "/Volumes/MavenData ALMOHI/XXX lab/file_folder")
+# @examples update_info(info_dir = "/Volumes/MavenData ALMOHI/XXX lab/file_folder")
 #'
 #' @export
 #'

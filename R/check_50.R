@@ -6,7 +6,7 @@
 #'
 #' @return a new data frame with indication of the cases in which less than 50% of samples have the metabolite measured
 #'
-#' @examples check_50(data4)
+# @examples check_50(data4)
 #'
 #' @export
 #'

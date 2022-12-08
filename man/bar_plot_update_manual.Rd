@@ -36,7 +36,3 @@ a plot of the relative amounts of a specific metabolites that are part of the sp
 \description{
 This package contains functions to assist in the current UCLA Metabolomics Quality Control and Analysis Pipeline. Called by bar_update_manual. Finalizes the a page of plots of the relative amounts of the different metabolites that are part of the specified defined pathway.
 }
-\examples{
-bar_plot_update_manual(a, met, Title, x, y, axis.text.x, scales='free', num_cond = n, type = "tf")
-
-}

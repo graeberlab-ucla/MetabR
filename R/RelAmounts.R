@@ -6,7 +6,6 @@
 #'
 #' @return a data frame that is in the correct format for the bar_update_manual function to create the Relative Amounts plot.
 #'
-#' @examples my_make_RelAmounts_QC(data2, anova = TRUE, type = '250K')
 #'
 #' @export
 

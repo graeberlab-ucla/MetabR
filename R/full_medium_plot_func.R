@@ -14,7 +14,7 @@
 #' @return a plot of the relative amounts or samples relative to unspent of specific metabolites
 #' @export
 #'
-#' @examples full_medium_plot_func(unname(unlist(lst)),a, n = num_conditions, type = "tf", title_type = "medium", mediumtitle="Plots-Relative-To-Fresh", color_lst=amounts3_colors)
+# @examples full_medium_plot_func(unname(unlist(lst)),a, n = num_conditions, type = "tf", title_type = "medium", mediumtitle="Plots-Relative-To-Fresh", color_lst=amounts3_colors)
 #'
 full_medium_plot_func<-function (metabolites, df, repeats, n, type=NULL, index = NULL, title_type,
                              only_M0 = NA,  mediumtitle=NULL,color_lst=NULL)
