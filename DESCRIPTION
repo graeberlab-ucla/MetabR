@@ -23,4 +23,5 @@ Imports:
     dplyr,
     magrittr,
     readxl,
+    tidyr,
     xlsx

@@ -32,8 +32,20 @@ make_MA_PItbl <- function(data_dir, info, Abbrev, abbr = F) {
     names(md_abbr)[1] <- "Sample"
     md <- md_abbr
   }
+  if (!all(is.na(info$Cell.Number))){ # Add Cell.Number row if provided
+    info$Cell.Number <- ifelse(is.na(info$Cell.Number), "1", info$Cell.Number)
+    md <- rbind(c("Cell.Number", info$Cell.Number), md)
+  }
   md <- rbind(c("Condition", info$Condition), md) # Add labels as first row
-  md <- md %>% select(-starts_with('QC'))   # Filter out QC
+  md <- md %>% select(-tidyr::starts_with('QC-250'))   # Filter out QC-250ks
+  md[1,] <- ifelse(grepl("QC", md[1,]), "QC", md[1,]) # Change blank condition to "QC"
+  # Replace 0s with NA disregarding QC-blanks
+  md_NA <- md[2:nrow(md),2:(which(grepl("QC", md))[1] - 1)]
+  md_NA <- as.data.frame(sapply(md_NA, as.numeric))
+  md_NA[md_NA == 0] <- NA
+  md_NA <- as.data.frame(sapply(md_NA, as.character))
+  md[2:nrow(md),2:(which(grepl("QC", md))[1] - 1)] <- md_NA
+
   write.csv(md, file = paste0(data_dir, "/", Title, "_MetaboAnalystPeakIntensityTbl.csv"),
             row.names = F)
 }
