@@ -6,7 +6,7 @@
 #'
 #' @return A list of two dataframes, data (the updated data) and Std (the dataframe to be used to make the ISTD plot)
 #'
-#' @examples make_istd(data)
+# @examples make_istd(data)
 #'
 #' @export
 #'

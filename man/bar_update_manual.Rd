@@ -24,7 +24,3 @@ a page of plots of the relative amounts of the different metabolites that are pa
 \description{
 This package contains functions to assist in the current UCLA Metabolomics Quality Control and Analysis Pipeline.
 }
-\examples{
-bar_update_manual(metabolites = 'glycolysis', df = data4, n = num_conditions, type = "blank", title_type = "nonpathway")
-
-}

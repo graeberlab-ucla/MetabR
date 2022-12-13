@@ -15,7 +15,3 @@ A data frame with percent labeled calculations.
 \description{
 This package contains functions to assist in the current UCLA Metabolomics Quality Control and Analysis Pipeline.
 }
-\examples{
-make_data_labeled(DF = data3)
-
-}

@@ -6,7 +6,7 @@
 #'
 #' @return a page of plots of the relative amounts of the different metabolites that are part of the specified defined pathway ('metabolites' parameter)
 #'
-#' @examples bar_update_manual(metabolites = 'glycolysis', df = data4, n = num_conditions, type = "blank", title_type = "nonpathway")
+# @examples bar_update_manual(metabolites = 'glycolysis', df = data4, n = num_conditions, type = "blank", title_type = "nonpathway")
 #'
 #' @export
 #'

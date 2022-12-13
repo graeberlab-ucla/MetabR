@@ -15,7 +15,3 @@ a new data frame with indication of the cases in which less than 50% of samples 
 \description{
 This package contains functions to assist in the current UCLA Metabolomics Quality Control and Analysis Pipeline.
 }
-\examples{
-check_50(data4)
-
-}

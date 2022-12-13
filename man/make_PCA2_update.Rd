@@ -15,7 +15,3 @@ A pdf file with a scree plot, a pair plot with the first five PCs, and a PCA plo
 \description{
 This package contains functions to assist in the current UCLA Metabolomics Quality Control and Analysis Pipeline.
 }
-\examples{
-make_PCA2_update(matrix = RelA)
-
-}

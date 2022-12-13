@@ -15,7 +15,3 @@ A list of two dataframes, data (the updated data) and Std (the dataframe to be u
 \description{
 This package contains functions to assist in the current UCLA Metabolomics Quality Control and Analysis Pipeline.
 }
-\examples{
-make_istd(data)
-
-}

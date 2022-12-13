@@ -15,7 +15,3 @@ A dataframe of the filtered data. Or if type = 'QC', a vector of the isotopologu
 \description{
 This package contains functions to assist in the current UCLA Metabolomics Quality Control and Analysis Pipeline.
 }
-\examples{
-filter_data(data = data, info = info, type = 'QC')
-
-}

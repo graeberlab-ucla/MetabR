@@ -6,7 +6,7 @@
 #'
 #' @return
 #'
-#' @examples
+# @examples
 #'
 #' @export
 #'

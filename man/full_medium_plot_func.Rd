@@ -36,7 +36,3 @@ a plot of the relative amounts or samples relative to unspent of specific metabo
 \description{
 This package contains functions to assist in the current UCLA Metabolomics Quality Control and Analysis Pipeline.
 }
-\examples{
-full_medium_plot_func(unname(unlist(lst)),a, n = num_conditions, type = "tf", title_type = "medium", mediumtitle="Plots-Relative-To-Fresh", color_lst=amounts3_colors)
-
-}

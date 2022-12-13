@@ -10,20 +10,11 @@ make_heatmap2(
   heat.color = normal,
   cluster_samples = TRUE,
   width = NA,
-  height = NA
+  height = NA,
+  ext = NA
 )
 }
 \arguments{
-\item{matrix}{}
-
-\item{samples}{}
-
-\item{heat.color}{}
-
-\item{cluster_samples}{}
-
-\item{width}{}
-
 \item{height}{}
 }
 \description{

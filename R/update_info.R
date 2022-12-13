@@ -6,7 +6,7 @@
 #'
 #' @return An updated excel sheet with sample run orders and the quality control blanks, 250ks, and samples.
 #'
-#' @examples update_info(info_dir = "/Users/juyeki/lab_folder")
+# @examples update_info(info_dir = "/Users/juyeki/lab_folder")
 #'
 #' @export
 #'

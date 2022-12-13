@@ -6,7 +6,7 @@
 #'
 #' @return A data frame with percent labeled calculations.
 #'
-#' @examples make_data_labeled(DF = data3)
+# @examples make_data_labeled(DF = data3)
 #'
 #' @export
 #'
