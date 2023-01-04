@@ -2,7 +2,7 @@
 % Please edit documentation in R/make_heatmap2.R
 \name{make_heatmap2}
 \alias{make_heatmap2}
-\title{Title}
+\title{Make heatmap}
 \usage{
 make_heatmap2(
   matrix,
@@ -15,8 +15,21 @@ make_heatmap2(
 )
 }
 \arguments{
-\item{height}{}
+\item{matrix}{Data matrix}
+
+\item{samples}{Sample info sheet data}
+
+\item{heat.color}{Color}
+
+\item{cluster_samples}{Logical; T to cluster}
+
+\item{width}{Plot width}
+
+\item{height}{Plot height}
+}
+\value{
+Heatmap
 }
 \description{
-Title
+Make heatmap
 }

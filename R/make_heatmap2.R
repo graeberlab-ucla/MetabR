@@ -1,16 +1,15 @@
-#' Title
+#' Make heatmap
 #'
-#' @param matrix
-#' @param samples
-#' @param heat.color
-#' @param cluster_samples
-#' @param width
-#' @param height
+#' @param matrix Data matrix
+#' @param samples Sample info sheet data
+#' @param heat.color Color
+#' @param cluster_samples Logical; T to cluster
+#' @param width Plot width
+#' @param height Plot height
 #'
-#' @return
+#' @return Heatmap
 #' @export
 #'
-#' @examples
 make_heatmap2 <- function (matrix, samples = samples, heat.color = normal, cluster_samples = TRUE, width = NA, height = NA, ext=NA)
 {
   if(is.na(ext)){
@@ -29,7 +28,7 @@ make_heatmap2 <- function (matrix, samples = samples, heat.color = normal, clust
   ann <- select(samples, Condition, Cell.Number) %>% as.data.frame()
   rownames(ann) <- colnames(matrix)
   #ann$Cell.Number <- 1
-  if (all(is.na(Norv))| length(Norv)==0) {
+  if(all(is.na(Norv))| length(Norv)==0) {
     ann_colors = list(
       Condition=colors[1:length(unique(gsub('_(.)*','',colnames(matrix))))],
       Cell.Number = c("white", "green"))
@@ -42,6 +41,11 @@ make_heatmap2 <- function (matrix, samples = samples, heat.color = normal, clust
   }
   names(ann_colors[["Condition"]]) <- unique(gsub("_(.)*",
                                                   "", colnames(matrix)))
+  if (all(is.na(ann$Cell.Number))) { # Remove Cell.Number annotation if not provided
+   ann$Cell.Number <- NULL
+   ann_colors[["Cell.Number"]] <- NULL
+  }
+
   matrix[is.na(matrix)] <- 0
   heatmap.title = paste(Title, "-Heatmap-", ext, ".pdf", sep = "")
   if (cluster_samples == F)
