@@ -8,6 +8,8 @@
 #' @param info Sample info sheet, commonly used when running Metabolomics data. Only the info$Condition column is used (make sure this contains factors).
 #'
 #' @return corr2 NIC corrected version. Not yet in the format for "MIDS corrected output"
+#'
+#' @importFrom dplyr select gather arrange unite mutate separate rename
 #' @export
 #'
 #' @examples temp<-call_accucor1(mid_output, Abbrev, Title, info) #title is not used. It will be for writing file.
@@ -36,7 +38,7 @@ call_accucor1<-function(mid_output, abbrev, Title, info){
     arrange(Name, Condition) %>%
     unite(Condition_Exp, c(Condition, Exp), sep='_') %>%
     mutate(Condition_Exp=factor(Condition_Exp, levels=unique(Condition_Exp))) %>%
-    spread(Condition_Exp, Value)
+    tidyr::spread(Condition_Exp, Value)
 
   uncorr$Iso<-gsub("-", "-label-", uncorr$Iso)
 
@@ -80,11 +82,11 @@ call_accucor1<-function(mid_output, abbrev, Title, info){
   #adjust uncorr to be in the same format as corr
   uncorr$IsotopeLabel<-gsub("C12 PARENT", "0", uncorr$IsotopeLabel)
   uncorr$IsotopeLabel<-gsub(paste0(label,"-label-"), "", uncorr$IsotopeLabel)
-  uncorr$IsotopeLabel<-paste0(str_pad(uncorr$IsotopeLabel, 2, pad = "0"))
+  uncorr$IsotopeLabel<-paste0(stringr::str_pad(uncorr$IsotopeLabel, 2, pad = "0"))
   uncorr$Comp_Iso<-paste(uncorr$Compound, uncorr$IsotopeLabel, sep="_")
 
   names(corr)[grepl("Label",names(corr))]<-"Iso"
-  corr$Iso<-paste0(str_pad(corr$Iso, 2, pad = "0"))#makes it so all numbers have two digits. 00, 01, 02, ... keeps order correct.
+  corr$Iso<-paste0(stringr::str_pad(corr$Iso, 2, pad = "0"))#makes it so all numbers have two digits. 00, 01, 02, ... keeps order correct.
   corr<-corr%>% mutate(Comp_Iso=paste(Compound, Iso, sep="_"))
 
   #Get rid of extra rows that were added during correction (Accucor generates all possible isotopologues).
