@@ -9,7 +9,8 @@
 #'
 #' @return corr2 NIC corrected version. Not yet in the format for "MIDS corrected output"
 #'
-#' @importFrom dplyr select gather arrange unite mutate separate rename
+#' @importFrom dplyr select arrange mutate rename
+#' @importFrom tidyr unite gather spread separate
 #' @export
 #'
 #' @examples temp<-call_accucor1(mid_output, Abbrev, Title, info) #title is not used. It will be for writing file.
@@ -38,7 +39,7 @@ call_accucor1<-function(mid_output, abbrev, Title, info){
     arrange(Name, Condition) %>%
     unite(Condition_Exp, c(Condition, Exp), sep='_') %>%
     mutate(Condition_Exp=factor(Condition_Exp, levels=unique(Condition_Exp))) %>%
-    tidyr::spread(Condition_Exp, Value)
+    spread(Condition_Exp, Value)
 
   uncorr$Iso<-gsub("-", "-label-", uncorr$Iso)
 
