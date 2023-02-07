@@ -5,9 +5,8 @@
 #' Converts mid_output data to format for Accucor2.
 #' @param mid_output Uncorrected Mid output for DOUBLE labeled set.
 #' @param abbrev The downloaded Google sheets: Abbrev_New2. Columns Abb, Neutral.Formula,Compound, and KEGG.ID are used in function.
-#' @param output_dir
-#' @param Title
-#'
+#' @param output_dir path
+#' @param Title Title to use for naming the corrected file
 #' @return corr3 NIC corrected version. Not yet in the format for "MIDS corrected output"
 #' @importFrom dplyr select arrange mutate rename relocate group_by ungroup
 #' @importFrom tidyr unite gather spread separate
@@ -50,15 +49,15 @@ call_accucor2<-function(mid_output, abbrev, output_dir, Title){
   y[,1]<-gsub("C12 PARENT|M0", "0", y[,1])
   y[,1]<-gsub(paste0("^", IsoID2, "-"), paste0(IsoID2, "-0-"), y[,1])
 
-  ychart<-as.data.frame(stringr::str_split_fixed(y[,1], "\\-", 3))
-  ychart <- replace(ychart, ychart=='', '0')
-  ychart[,1]<-NULL
+  isochart<-as.data.frame(stringr::str_split_fixed(y[,1], "\\-", 3))
+  isochart <- replace(isochart, isochart=='', '0')
+  isochart[,1]<-NULL
 
-  names(ychart)<-IsoIDs
-  ychart[,1]<-as.numeric(ychart[,1])
-  ychart[,2]<-as.numeric(ychart[,2])
+  names(isochart)<-IsoIDs
+  isochart[,1]<-as.numeric(isochart[,1])
+  isochart[,2]<-as.numeric(isochart[,2])
 
-  uncorr<-cbind(uncorr, ychart)
+  uncorr<-cbind(uncorr, isochart)
   uncorr$Iso<-NULL
 
   abbrev_og<-abbrev

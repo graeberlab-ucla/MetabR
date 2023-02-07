@@ -13,7 +13,7 @@
 #' @importFrom tidyr unite gather spread separate
 #' @export
 #'
-#' @examples temp<-call_accucor1(mid_output, Abbrev, Title, info) #title is not used. It will be for writing file.
+#' @examples temp<-call_accucor1(mid_output, Abbrev, Title, info)
 #'
 call_accucor1<-function(mid_output, abbrev, Title, info){
   # require(accucor)
@@ -62,7 +62,9 @@ call_accucor1<-function(mid_output, abbrev, Title, info){
   print("Performing Natural Isotope Correction...")
   corrected <- accucor::natural_abundance_correction(
     path = uncorr2,
-    resolution = resolution, output_base = FALSE) #output_base = FALSE so it doesn't write output
+    resolution = resolution, output_base = TRUE)
+
+  file.rename("TRUE_corrected.xlsx", paste0(Title,"_Accucor1_function_output.xlsx"))
 
   corr<-corrected$Corrected
 

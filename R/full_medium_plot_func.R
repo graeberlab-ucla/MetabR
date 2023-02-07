@@ -2,12 +2,12 @@
 #' @description This package contains functions to assist in the current UCLA Metabolomics Quality Control and Analysis Pipeline.
 #' @param metabolites list of metabolites used to run experiment
 #' @param df amounts3 or amounts
-#' @param repeats
+#' @param repeats Not currently used
 #' @param n n = num_conditions
 #' @param type type = "tf" or other
-#' @param index
-#' @param title_type
-#' @param only_M0
+#' @param index index from maven_analysis pre-determined groupings
+#' @param title_type "nonpathway1", "nonpathway2", or "nonpathway3", or something else
+#' @param only_M0 Not currently being used
 #' @param mediumtitle mediumtitle="Plots-Relative-To-Fresh"
 #' @param color_lst m_ind<-which(!grepl("unspent|[Bb]lank|[Ff]resh|[Cc]ontrol|[Mm]edium|[Mm]edia",unique(amounts$Condition)))   amounts3_colors<- colors1[m_ind]
 #'

@@ -15,7 +15,9 @@ call_accucor2(mid_output, abbrev, output_dir, Title)
 
 \item{abbrev}{The downloaded Google sheets: Abbrev_New2. Columns Abb, Neutral.Formula,Compound, and KEGG.ID are used in function.}
 
-\item{Title}{}
+\item{output_dir}{path}
+
+\item{Title}{Title to use for naming the corrected file}
 }
 \value{
 corr3 NIC corrected version. Not yet in the format for "MIDS corrected output"

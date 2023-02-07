@@ -28,6 +28,6 @@ Converts mid_output data to format for Accucor1.
 install.packages("accucor")
 }
 \examples{
-temp<-call_accucor1(mid_output, Abbrev, Title, info) #title is not used. It will be for writing file.
+temp<-call_accucor1(mid_output, Abbrev, Title, info)
 
 }

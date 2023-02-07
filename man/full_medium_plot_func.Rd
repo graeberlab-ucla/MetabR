@@ -22,9 +22,17 @@ full_medium_plot_func(
 
 \item{df}{amounts3 or amounts}
 
+\item{repeats}{Not currently used}
+
 \item{n}{n = num_conditions}
 
 \item{type}{type = "tf" or other}
+
+\item{index}{index from maven_analysis pre-determined groupings}
+
+\item{title_type}{"nonpathway1", "nonpathway2", or "nonpathway3", or something else}
+
+\item{only_M0}{Not currently being used}
 
 \item{mediumtitle}{mediumtitle="Plots-Relative-To-Fresh"}
 

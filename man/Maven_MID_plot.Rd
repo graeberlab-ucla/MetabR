@@ -16,9 +16,19 @@ Maven_MID_plot(
 )
 }
 \arguments{
+\item{df}{data frame such as data3, data4, data_labeled, FC}
+
+\item{repeats}{Not currently being used}
+
 \item{n}{number of conditions}
 
-\item{only_M0}{}
+\item{type}{tf}
+
+\item{index}{index from maven_analysis pre-determined groupings}
+
+\item{title_type}{"nonpathway1", "nonpathway2", or "nonpathway3", or something else}
+
+\item{only_M0}{Not currently being used}
 }
 \description{
 Maven_MID_plot

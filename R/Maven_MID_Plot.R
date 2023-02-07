@@ -1,13 +1,13 @@
 #' Maven_MID_plot
 #'
 #' @param metabolites
-#' @param df
-#' @param repeats
+#' @param df data frame such as data3, data4, data_labeled, FC
+#' @param repeats Not currently being used
 #' @param n number of conditions
-#' @param type
-#' @param index
-#' @param title_type
-#' @param only_M0
+#' @param type tf
+#' @param index index from maven_analysis pre-determined groupings
+#' @param title_type "nonpathway1", "nonpathway2", or "nonpathway3", or something else
+#' @param only_M0  Not currently being used
 #'
 #' @return
 #' @export
