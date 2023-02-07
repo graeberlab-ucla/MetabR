@@ -84,7 +84,7 @@ call_accucor2<-function(mid_output, abbrev, output_dir, Title){
 
   sub<-sub%>%select(Name, parent, which(grepl("#", names(sub))), Expected, everything() ) #grabs C,N, or H columns
 
-  write.xlsx(sub, paste0("Uncorr_Accucor2_input_",label, ".xlsx"), row.names = F)
+  xlsx::write.xlsx(sub, paste0("Uncorr_Accucor2_input_",label, ".xlsx"), row.names = F)
 
 
   corrected <- dual_correction(paste0("Uncorr_Accucor2_input_",label, ".xlsx"),
