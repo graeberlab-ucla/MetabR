@@ -8,8 +8,8 @@
 #' @param output_dir
 #' @param Title
 #'
-#' @return corr2 NIC corrected version. Not yet in the format for "MIDS corrected output"
-#' @importFrom dplyr select arrange mutate rename relocate
+#' @return corr3 NIC corrected version. Not yet in the format for "MIDS corrected output"
+#' @importFrom dplyr select arrange mutate rename relocate group_by ungroup
 #' @importFrom tidyr unite gather spread separate
 #' @export
 #'
@@ -100,50 +100,50 @@ call_accucor2<-function(mid_output, abbrev, output_dir, Title){
   names(corr)[2]<-"IsoID1"
   names(corr)[3]<-"IsoID2"
 
-  testing<-corr%>%gather(Condition_Exp, Value, -Compound, -IsoID1, -IsoID2) #add 2H
+  corr2<-corr%>%gather(Condition_Exp, Value, -Compound, -IsoID1, -IsoID2) #add 2H
 
 
-  testing<-testing%>%separate(Condition_Exp, c('Condition', 'Exp'), sep='_')
+  corr2<-corr2%>%separate(Condition_Exp, c('Condition', 'Exp'), sep='_')
 
-  names(testing)[which(grepl("Compound",names(testing)))]<-"Name"
+  names(corr2)[which(grepl("Compound",names(corr2)))]<-"Name"
 
-  testing <- testing %>%
+  corr2 <- corr2 %>%
     group_by(Name, Condition, Exp) %>%
     arrange(Name, Condition, Exp) %>%
     mutate(Sum = sum(Value, na.rm = T), Fraction = Value * 100 / Sum) %>%
     ungroup()
 
-  testing$IsoID1[which(grepl("00", testing$IsoID1) & grepl("00", testing$IsoID2))] <-"C12 PARENT"
-  testing$IsoID2[which(grepl("C12 PARENT", testing$IsoID1))]<-NA
+  corr2$IsoID1[which(grepl("00", corr2$IsoID1) & grepl("00", corr2$IsoID2))] <-"C12 PARENT"
+  corr2$IsoID2[which(grepl("C12 PARENT", corr2$IsoID1))]<-NA
 
   #C13-
-  testing$IsoID1[which(grepl("00", testing$IsoID1))] <-paste0(paste0(IsoID2,"-"), testing$IsoID2[which(grepl("00", testing$IsoID1))])
-  testing$IsoID2[which(grepl(paste0(IsoID2,"-"), testing$IsoID1))]<-NA
+  corr2$IsoID1[which(grepl("00", corr2$IsoID1))] <-paste0(paste0(IsoID2,"-"), corr2$IsoID2[which(grepl("00", corr2$IsoID1))])
+  corr2$IsoID2[which(grepl(paste0(IsoID2,"-"), corr2$IsoID1))]<-NA
 
   #N15- or H2
-  testing$IsoID1[which(grepl("00", testing$IsoID2))] <-paste0(paste0(IsoID1,"-"), testing$IsoID1[which(grepl("00", testing$IsoID2))])
-  testing$IsoID2[which(grepl(paste0(IsoID1,"-"), testing$IsoID1))]<-NA
+  corr2$IsoID1[which(grepl("00", corr2$IsoID2))] <-paste0(paste0(IsoID1,"-"), corr2$IsoID1[which(grepl("00", corr2$IsoID2))])
+  corr2$IsoID2[which(grepl(paste0(IsoID1,"-"), corr2$IsoID1))]<-NA
 
   #C13N15- or C13H2
-  testing$IsoID1[which(!is.na(testing$IsoID2))]<-paste0(paste0(IsoID1,IsoID2,"-"), testing$IsoID1[which(!is.na(testing$IsoID2))], "-", testing$IsoID2[which(!is.na(testing$IsoID2))])
-  testing$IsoID2[which(!is.na(testing$IsoID2))]<-NA
-  testing$IsoID2<-NULL
-  names(testing)[2]<-"Iso"
+  corr2$IsoID1[which(!is.na(corr2$IsoID2))]<-paste0(paste0(IsoID1,IsoID2,"-"), corr2$IsoID1[which(!is.na(corr2$IsoID2))], "-", corr2$IsoID2[which(!is.na(corr2$IsoID2))])
+  corr2$IsoID2[which(!is.na(corr2$IsoID2))]<-NA
+  corr2$IsoID2<-NULL
+  names(corr2)[2]<-"Iso"
 
 
-  testing<-testing%>%select(Name, Iso, Condition, Exp, Value)
-  corr2<-testing
+  corr2<-corr2%>%select(Name, Iso, Condition, Exp, Value)
+  corr3<-corr2
 
-  indx <- match(corr2$Name,abbrev_og$Abb)
-  corr2$KEGG.ID <- abbrev_og$KEGG.ID[indx]
+  indx <- match(corr3$Name,abbrev_og$Abb)
+  corr3$KEGG.ID <- abbrev_og$KEGG.ID[indx]
 
-  corr2["Norm_Av"] <- corr2["Norm_Std"] <- corr2["CV"] <- corr2["Av"] <- corr2["Nr.C.x"] <-
-    corr2["MID1"] <- corr2["MID2"] <- corr2["MID3"] <- corr2["Nr.C.y"] <- corr2["Old Uncorrected Value"] <-
-    corr2["ANOVA"] <- corr2["Sig"] <- NA
+  corr3["Norm_Av"] <- corr3["Norm_Std"] <- corr3["CV"] <- corr3["Av"] <- corr3["Nr.C.x"] <-
+    corr3["MID1"] <- corr3["MID2"] <- corr3["MID3"] <- corr3["Nr.C.y"] <- corr3["Old Uncorrected Value"] <-
+    corr3["ANOVA"] <- corr3["Sig"] <- NA
 
-  corr2 <- corr2 %>% relocate(KEGG.ID, .after = MID3)
+  corr3 <- corr3 %>% relocate(KEGG.ID, .after = MID3)
 
 
-  return(corr2)
+  return(corr3)
 }
 

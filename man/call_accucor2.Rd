@@ -18,7 +18,7 @@ call_accucor2(mid_output, abbrev, output_dir, Title)
 \item{Title}{}
 }
 \value{
-corr2 NIC corrected version. Not yet in the format for "MIDS corrected output"
+corr3 NIC corrected version. Not yet in the format for "MIDS corrected output"
 }
 \description{
 call_accucor2
