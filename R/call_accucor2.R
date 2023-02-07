@@ -87,7 +87,7 @@ call_accucor2<-function(mid_output, abbrev, output_dir, Title){
   xlsx::write.xlsx(sub, paste0("Uncorr_Accucor2_input_",label, ".xlsx"), row.names = F)
 
 
-  corrected <- dual_correction(paste0("Uncorr_Accucor2_input_",label, ".xlsx"),
+  corrected <- accucor2::dual_correction(paste0("Uncorr_Accucor2_input_",label, ".xlsx"),
                                sheet_name,paste0("Abbrev_Accucor2_input",  ".csv"),label, Resolution = resolution) #Isotopes can be "CN" or "CH"
 
   filename<-list.files(pattern = paste0("Corrected_", gsub( '-', '', Sys.Date())))
