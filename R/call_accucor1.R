@@ -71,7 +71,7 @@ call_accucor1<-function(mid_output, abbrev, Title, info){
   if(dim(formula_na)[1]!=0){
     #may need to state this as an unsuccessful correction
   isochart<-as.data.frame(stringr::str_split_fixed(formula_na[,3], "\\-", 3))
-  isochart <- stringr::str_replace(isochart, isochart=='', '0')
+  isochart <- stringr::replace(isochart, isochart=='', '0')
   formula_na$IsotopeLabel<-isochart[,3]
   formula_na$Formula<-NULL
   names(formula_na)[2]<-names(corr)[2]
