@@ -35,7 +35,7 @@ call_accucor1<-function(mid_output, abbrev, Title, info){
 
   uncorr<-mid_output%>%
     select(Name, Condition, Iso, which(grepl("Exp", names(mid_output)))) %>%
-    gather(Exp, Value, -Name, -Condition, -Iso) %>%
+    gather(Exp, Value, -Name, -Condition, -Iso, na.rm = T) %>%
     arrange(Name, Condition) %>%
     unite(Condition_Exp, c(Condition, Exp), sep='_') %>%
     mutate(Condition_Exp=factor(Condition_Exp, levels=unique(Condition_Exp))) %>%
