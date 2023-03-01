@@ -53,7 +53,7 @@ make_heatmap2 <- function (matrix, samples = samples, heat.color = normal, clust
                           ".pdf", sep = "")
   if (is.na(width) & is.na(height)) {
     pheatmap::pheatmap(matrix, cluster_row = T, cluster_col = cluster_samples,
-                       clustering_distance_rows = "correlation", clustering_distance_cols = "correlation",
+                       clustering_distance_rows = "euclidean", clustering_distance_cols = "euclidean",
                        color = colorRampPalette(heat.color)(100), border_color = "black",
                        scale = "row", cellwidth = 20, cellheight = 10,
                        annotation = ann, annotation_colors = ann_colors,
@@ -67,7 +67,7 @@ make_heatmap2 <- function (matrix, samples = samples, heat.color = normal, clust
     matrix_remove <- matrix[rownames(matrix) %in% names(zero_variance_vec),]
     ### Changed matrix to matrix_filt
     pheatmap::pheatmap(matrix_filt, cluster_row = T, cluster_col = cluster_samples
-                       ,clustering_distance_rows = "correlation", clustering_distance_cols = "correlation",
+                       ,clustering_distance_rows = "euclidean", clustering_distance_cols = "euclidean",
                        color = colorRampPalette(heat.color)(100), border_color = "black",
                        scale = "row", cellwidth = 20, cellheight = 10,
                        annotation = ann, annotation_colors = ann_colors,

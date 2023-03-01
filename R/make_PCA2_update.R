@@ -55,7 +55,7 @@ make_PCA2_update <- function(matrix, a=1, b=2, cutoff = 0.5)
                        auto.key=list(columns=4), pch=19))
 
   plot <- ggplot(PC, aes(PC[,a], PC[,b], label = Sample.Name),col=Condition)+
-    geom_label_repel(color='black', fontface='bold', size=2.5, point.padding = .3,label.size = NA,segment.alpha = 0.6) +
+    geom_label_repel(color='black', fontface='bold', size=2.5, point.padding = .3,label.size = NA,segment.alpha = 0.6, max.overlaps = Inf) +
     geom_point(size=3, shape=21, aes(fill=Condition))+
     labs(x=paste('PC',a, ' (',var_PCs[a],'%)',sep=''), y=paste('PC',b, ' (',var_PCs[b],'%)',sep=''), title=paste('PC',a,' vs. PC',b,': All samples', sep=''))+
     theme_bw()+
@@ -65,7 +65,7 @@ make_PCA2_update <- function(matrix, a=1, b=2, cutoff = 0.5)
 
   CCP_plot <- filter(CCP, Corr >= cutoff) %>%
     ggplot(., aes(.[,a], .[,b], label=Metabolite))+
-    geom_text_repel(aes(label=Metabolite, fontface=2),size=2.5,point.padding=.3,color="navy", min.segment.length= 0.1, segment.color = "grey", segment.alpha = 0.6)+
+    geom_text_repel(aes(label=Metabolite, fontface=2),size=2.5,point.padding=.3,color="navy", min.segment.length= 0.1, segment.color = "grey", segment.alpha = 0.6, max.overlaps = Inf)+
     geom_point(size=2, color='black')+
     #  geom_text(vjust=-1, color='navy', size=3)+
     labs(x=paste('PC',a, ' (',var_PCs[a],'%)',sep=''),
