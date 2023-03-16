@@ -18,9 +18,13 @@
 #'
 bar_plot_update_manual <- function(a, met, Title, x, y, axis.text.x, scales, type = NULL, num_cond=NULL,index=NULL)
 {
+  if(exists(colors)){
+    col<-colors
+  }else{
   col<-c("turquoise","red","plum4","steelblue1","red4","springgreen2","slateblue2","darkgreen","lightpink1","navy","olivedrab1",
          "orangered","darkslateblue","lightseagreen","magenta2","royalblue","yellowgreen","lightsalmon","cyan","maroon1","indianred3","mediumseagreen",
          "slateblue3","hotpink","lemonchiffon1","orangered4","lightcoral","tomato")
+  }
   if(!is.null(index))
   {
     j  <- 1
