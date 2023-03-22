@@ -19,7 +19,8 @@ make_MA_PItbl <- function(data_dir, info, Abbrev, abbr = F) {
   md <- md[!grepl(" Std", md$Sample),] # Remove stds
   # Sum metabolite parent with isotopologue if labeled
   if(labeled == "full" | labeled == "partial" | grepl("PARENT",md[1,1])){
-    md$Sample <- sub(" C\\d\\d[ |-][P|l].*", "", md$Sample)
+    md$Sample <- sub(" C\\d\\d[ |-][P|l].*", "", md$Sample) # Carbon labeled
+    md$Sample <- sub(" N\\d\\d[ |-][P|l].*", "", md$Sample) # Nitrogen labeled
     md <- md %>%
       group_by(Sample) %>%
       summarise(across(where(is.numeric), sum))
