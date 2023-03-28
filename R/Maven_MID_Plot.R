@@ -107,6 +107,7 @@ Maven_MID_plot <- function(metabolites, df, repeats, n, type, index = NULL, titl
     stopifnot(length(unique(met$Name)) >= 1)
     met <- mutate(met, Iso = paste(Iso, Sig, sep = "\n"),
                   Sig = "")
+    met$Iso <- gsub("PARENT", "P", met$Iso)
     met <- met %>%
       mutate(Iso = factor(Iso, levels = sort(unique(Iso))))
     Title = paste0("Isotopologue distribution of ", ending, " (Corrected for natural abundance)")
