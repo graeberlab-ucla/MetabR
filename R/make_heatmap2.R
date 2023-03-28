@@ -47,17 +47,17 @@ make_heatmap2 <- function (matrix, samples = samples, heat.color = normal, clust
   }
 
   matrix[is.na(matrix)] <- 0
-  heatmap.title = paste(Title, "-Heatmap-", ext, ".pdf", sep = "")
+  heatmap.title = paste0(Title, "-Heatmap-", ext, title_norm, ".pdf")
   if (cluster_samples == F)
-    heatmap.title = paste(Title, "-Heatmap-", ext, "-Unclustered",
-                          ".pdf", sep = "")
+    heatmap.title = paste0(Title, "-Heatmap-", ext, "-Unclustered", title_norm,
+                          ".pdf")
   if (is.na(width) & is.na(height)) {
     pheatmap::pheatmap(matrix, cluster_row = T, cluster_col = cluster_samples,
                        clustering_distance_rows = "euclidean", clustering_distance_cols = "euclidean",
                        color = colorRampPalette(heat.color)(100), border_color = "black",
                        scale = "row", cellwidth = 20, cellheight = 10,
                        annotation = ann, annotation_colors = ann_colors,
-                       show_colnames = F, main = paste(Title, ext, sep = "-"),
+                       show_colnames = F, main = paste(Title, ext, tools::toTitleCase(title_norm) ,sep = "-"),
                        filename = heatmap.title)
   }else {
     ### Added code to remove rows with zero variance
@@ -71,7 +71,7 @@ make_heatmap2 <- function (matrix, samples = samples, heat.color = normal, clust
                        color = colorRampPalette(heat.color)(100), border_color = "black",
                        scale = "row", cellwidth = 20, cellheight = 10,
                        annotation = ann, annotation_colors = ann_colors,
-                       show_colnames = F, main = paste(Title, ext, sep = "-"),
+                       show_colnames = F, main = paste0(Title, "-", ext, tools::toTitleCase(title_norm)),
                        filename = heatmap.title, width = width, height = height)
 
     #pheatmap::pheatmap(matrix, cluster_row = T, cluster_col = cluster_samples,
