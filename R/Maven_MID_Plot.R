@@ -107,6 +107,7 @@ Maven_MID_plot <- function(metabolites, df, repeats, n, type, index = NULL, titl
     stopifnot(length(unique(met$Name)) >= 1)
     met <- mutate(met, Iso = paste(Iso, Sig, sep = "\n"),
                   Sig = "")
+    met$Iso <- gsub("PARENT", "P", met$Iso)
     met <- met %>%
       mutate(Iso = factor(Iso, levels = sort(unique(Iso))))
     Title = paste0("Isotopologue distribution of ", ending, " (Corrected for natural abundance)")
@@ -156,7 +157,8 @@ Maven_MID_plot <- function(metabolites, df, repeats, n, type, index = NULL, titl
   }
   else if (sum(grepl("Labeled", names(df))) >= 1) {
     met <- subset(df, Name %in% metabolites)
-    stopifnot(length(unique(met$Name)) >= 1)
+    # stopifnot(length(unique(met$Name)) >= 1)
+    if(!(length(unique(met$Name)) >= 1)) return(message(paste0("** ",ending," - no percent labeled metabolites")))
     met$Names <- met$Name
     met <- mutate(met, Name = paste(Name, Sig, sep = " "),
                   Sig = "")

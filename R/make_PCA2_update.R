@@ -41,11 +41,11 @@ make_PCA2_update <- function(matrix, a=1, b=2, cutoff = 0.5)
   loadings <- data.frame(pca$rotation)
   loadings$Name <- rownames(loadings)
   loadings <- select(loadings, Name, everything())
-  write.csv(loadings, file=paste0(Title,'-PC Loadings-',ext,'.csv'), row.names=T)
+  write.csv(loadings, file=paste0(Title,'-PC Loadings-',ext, title_norm,'.csv'), row.names=T)
   scores=pca$x
-  write.csv(scores, file=paste0(Title,'-PC Scores-',ext,'.csv'), row.names=T)
+  write.csv(scores, file=paste0(Title,'-PC Scores-',ext, title_norm,'.csv'), row.names=T)
 
-  PC.title=paste(Title,'-PC',a, ' vs. PC', b, '-PCA Plots2-', ext, '.pdf', sep='')
+  PC.title=paste(Title,'-PC',a, ' vs. PC', b, '-PCA Plots2-', ext, title_norm, '.pdf', sep='')
   pdf(file = PC.title, width=16, height=10)
 
   plot(var_PCs[1:min(10, length(pca$sdev))], type='b', pch=20, col='blue', ylab='Variance explained (%)', xlab='Principal Component', main='Screeplot')
@@ -86,12 +86,12 @@ make_PCA2_update <- function(matrix, a=1, b=2, cutoff = 0.5)
                              select(KEGG.ID, paste0('PC',a)))
   names(CCP1)[2] <- 'Norm_Av'
   CCP1$Norm_Av[is.na(CCP1$Norm_Av)] <- 0
-  write.csv(CCP1, paste0('CCP-PC', a, '-', ext,'.csv'), row.names=F)
+  write.csv(CCP1, paste0('CCP-PC', a, '-', ext, title_norm,'.csv'), row.names=F)
 
   CCP2 <- suppressWarnings(CCP %>%
                              right_join(., Abbrev, by=c('Metabolite'='Abb')) %>%
                              select(KEGG.ID, paste0('PC',b)))
   names(CCP2)[2] <- 'Norm_Av'
   CCP2$Norm_Av[is.na(CCP2$Norm_Av)] <- 0
-  write.csv(CCP2, paste0('CCP-PC', b, '-', ext,'.csv'), row.names=F)
+  write.csv(CCP2, paste0('CCP-PC', b, '-', ext, title_norm,'.csv'), row.names=F)
 }
