@@ -70,7 +70,7 @@ full_medium_plot_func<-function (metabolites, df, repeats, n, type=NULL, index =
    num_cond=n
 
     if(is.null(color_lst)){
-      color_lst<-c("turquoise","red","plum4","steelblue1","red4","springgreen2","slateblue2","sienna1","darkgreen","lightpink1","navy","olivedrab1",
+      color_lst<-c("turquoise","red","plum4","steelblue1","red4","springgreen2","slateblue2","darkgreen","lightpink1","navy","olivedrab1",
              "orangered","darkslateblue","lightseagreen","magenta2","royalblue","yellowgreen","lightsalmon","cyan","maroon1","indianred3","mediumseagreen",
              "slateblue3","hotpink","lemonchiffon1","orangered4","lightcoral","tomato")
     }else{
