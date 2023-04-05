@@ -162,6 +162,7 @@ Maven_MID_plot <- function(metabolites, df, repeats, n, type, index = NULL, titl
     met$Names <- met$Name
     met <- mutate(met, Name = paste(Name, Sig, sep = " "),
                   Sig = "")
+    met$Iso <- gsub("PARENT", "P", met$Iso)
     Title <- paste0("Percent labeled in ", ending)
     x <- ""
     y <- "% Labeled"
