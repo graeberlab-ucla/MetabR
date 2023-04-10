@@ -18,38 +18,38 @@
 #'
 bar_plot_update_manual <- function(a, met, Title, x, y, axis.text.x, scales, type = NULL, num_cond=NULL,index=NULL)
 {
-  col<-c("turquoise","red","plum4","steelblue1","red4","springgreen2","slateblue2","darkgreen","lightpink1","navy","olivedrab1",
-         "orangered","darkslateblue","lightseagreen","magenta2","royalblue","yellowgreen","lightsalmon","cyan","maroon1","indianred3","mediumseagreen",
-         "slateblue3","hotpink","lemonchiffon1","orangered4","lightcoral","tomato")
-  if(!is.null(index))
-  {
-    j  <- 1
-    k <- 1
-    extra_qc <- c("peachpuff1", "seashell1", "wheat2", "snow1")
-    res <- vector()
-    for( i in 1:num_cond)
-    {
-      if(i %in% index[[1]])
-        res <- c(res, "yellow1")
-      else if(i %in% index[[2]])
-        res <- c(res, "grey45")
-      else if (i %in% index[[4]]){
-        res <- c(res, "darkorange1")
-      }
-      else if(i %in% index[[3]])
-      {
-        res <- c(res, extra_qc[k])
-        k <- k + 1
-      }
-      else
-      {
-        res <- c(res, col[j])
-        j <- j + 1
-      }
-    }
-    col <- res
-  }
-
+  # col<-c("turquoise","red","plum4","steelblue1","red4","springgreen2","slateblue2","darkgreen","lightpink1","navy","olivedrab1",
+  #        "orangered","darkslateblue","lightseagreen","magenta2","royalblue","yellowgreen","lightsalmon","cyan","maroon1","indianred3","mediumseagreen",
+  #        "slateblue3","hotpink","lemonchiffon1","orangered4","lightcoral","tomato")
+  # if(!is.null(index))
+  # {
+  #   j  <- 1
+  #   k <- 1
+  #   extra_qc <- c("peachpuff1", "seashell1", "wheat2", "snow1")
+  #   res <- vector()
+  #   for( i in 1:num_cond)
+  #   {
+  #     if(i %in% index[[1]])
+  #       res <- c(res, "yellow1")
+  #     else if(i %in% index[[2]])
+  #       res <- c(res, "grey45")
+  #     else if (i %in% index[[4]]){
+  #       res <- c(res, "darkorange1")
+  #     }
+  #     else if(i %in% index[[3]])
+  #     {
+  #       res <- c(res, extra_qc[k])
+  #       k <- k + 1
+  #     }
+  #     else
+  #     {
+  #       res <- c(res, col[j])
+  #       j <- j + 1
+  #     }
+  #   }
+  #   col <- res
+  # }
+    col<-colors
 
     a + geom_bar(position="dodge", stat="identity", width=0.9) +
       geom_bar(aes(linetype=under_50_percent,color = under_50_percent, size=under_50_percent),position="dodge", stat="identity", width=0.9) +
