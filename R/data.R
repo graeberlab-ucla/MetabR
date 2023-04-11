@@ -90,11 +90,6 @@
 #'@format A character vector of length 7.
 "Uracil"
 
-#' A character vector of commonly used colors.
-#'
-#'@format A character vector of length 18.
-"colors"
-
 #' A data frame of 3443 KEGG metabolites and their association with 319 KEGG pathways.
 #'
 #'@format A data frame of 5860 rows and 5 variables.
