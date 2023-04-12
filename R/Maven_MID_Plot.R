@@ -104,7 +104,7 @@ Maven_MID_plot <- function(metabolites, df, repeats, n, type, index = NULL, titl
   else ending = ""
   if (sum(grepl("MID", names(df))) >= 1) {
     met = subset(df, Name %in% metabolites)
-    stopifnot(length(unique(met$Name)) >= 1)
+    if(!(length(unique(met$Name)) >= 1)) return(message(paste0("** ",ending," - no isotopologue distribution metabolites")))
     met <- mutate(met, Iso = paste(Iso, Sig, sep = "\n"),
                   Sig = "")
     met$Iso <- gsub("PARENT", "P", met$Iso)
@@ -128,7 +128,7 @@ Maven_MID_plot <- function(metabolites, df, repeats, n, type, index = NULL, titl
   else if (sum(grepl("Exp", names(df))) >= 1) {
     if (type == "tf") {
       met = subset(df, Name %in% metabolites)
-      stopifnot(length(unique(met$Name)) >= 1)
+      if(!(length(unique(met$Name)) >= 1)) return(message(paste0("** ",ending," - no relative amounts metabolites")))
       met <- mutate(met, Name = paste(Name, Sig, sep = " "),
                     Sig = "")
       Title = paste0("Relative amounts of ", ending, " (not corrected for blank values)")
@@ -143,7 +143,7 @@ Maven_MID_plot <- function(metabolites, df, repeats, n, type, index = NULL, titl
     }
     else {
       met = subset(df, Name %in% metabolites)
-      stopifnot(length(unique(met$Name)) >= 1)
+      if(!(length(unique(met$Name)) >= 1)) return(message(paste0("** ",ending," - no relative amounts metabolites")))
       Title = paste0("Relative amounts of ", ending)
       x = ""
       y = "Relative Amounts"
@@ -162,6 +162,7 @@ Maven_MID_plot <- function(metabolites, df, repeats, n, type, index = NULL, titl
     met$Names <- met$Name
     met <- mutate(met, Name = paste(Name, Sig, sep = " "),
                   Sig = "")
+    met$Iso <- gsub("PARENT", "P", met$Iso)
     Title <- paste0("Percent labeled in ", ending)
     x <- ""
     y <- "% Labeled"
@@ -178,7 +179,7 @@ Maven_MID_plot <- function(metabolites, df, repeats, n, type, index = NULL, titl
   }
   else if (sum(grepl("FC", names(df))) >= 1) {
     met <- subset(df, Name %in% metabolites)
-    stopifnot(length(unique(met$Name)) >= 1)
+    if(!(length(unique(met$Name)) >= 1)) return(message(paste0("** ",ending," - no fractional contribution metabolites")))
     met$Names <- met$Name
     met <- mutate(met, Name = paste(Name, Sig, sep = " "),
                   Sig = "")

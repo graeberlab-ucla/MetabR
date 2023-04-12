@@ -125,7 +125,7 @@ bar_update_manual <- function(metabolites, df, repeats, n, type,index = NULL, ti
   if (sum(grepl('MID', names(df))) >= 1)
   {
     met = subset(df, Name %in% metabolites)
-    stopifnot(length(unique(met$Name)) >= 1)
+    if(!(length(unique(met$Name)) >= 1)) return(message(paste0("** ",ending," - no isotopologue distribution metabolites")))
     met <-  mutate(met, Iso=paste(Iso, Sig, sep='\n'), Sig='') %>%
       mutate(Iso = factor(Iso, levels = paste(rep(paste('M', 0:50, sep=''), each=4),
                                               c('','*','**','***'), sep='\n')))
@@ -147,7 +147,7 @@ bar_update_manual <- function(metabolites, df, repeats, n, type,index = NULL, ti
     if (type == "tf")
     {
       met = subset(df, Name %in% metabolites)
-      stopifnot(length(unique(met$Name)) >= 1)
+      if(!(length(unique(met$Name)) >= 1)) return(message(paste0("** ",ending," - no relative amounts metabolites")))
       met <-  mutate(met, Name=paste(Name, Sig, sep=' '),
                      Sig='')
       Title = paste0("Relative amounts of ",ending, " (not corrected for blank values)")
@@ -158,7 +158,7 @@ bar_update_manual <- function(metabolites, df, repeats, n, type,index = NULL, ti
       bar_plot_update_manual(a, met, Title, x, y, axis.text.x, scales='free', num_cond = n, type = type,index)
     } else {
       met = subset(df, Name %in% metabolites)
-      stopifnot(length(unique(met$Name)) >= 1)
+      if(!(length(unique(met$Name)) >= 1)) return(message(paste0("** ",ending," - no relative amounts metabolites")))
       Title = paste0("Relative amounts of ",ending)
       x=''
       y='Relative Amounts'
@@ -171,7 +171,7 @@ bar_update_manual <- function(metabolites, df, repeats, n, type,index = NULL, ti
   else if (sum(grepl('Labeled', names(df))) >= 1)
   {
     met <- subset(df, Name %in% metabolites)
-    stopifnot(length(unique(met$Name)) >= 1)
+    if(!(length(unique(met$Name)) >= 1)) return(message(paste0("** ",ending," - no percent labeled metabolites")))
     met$Names <- met$Name
     met <-  mutate(met, Name=paste(Name, Sig, sep=' '),
                    Sig='')
@@ -192,7 +192,7 @@ bar_update_manual <- function(metabolites, df, repeats, n, type,index = NULL, ti
   else if (sum(grepl('FC', names(df))) >= 1)
   {
     met <- subset(df, Name %in% metabolites)
-    stopifnot(length(unique(met$Name)) >= 1)
+    if(!(length(unique(met$Name)) >= 1)) return(message(paste0("** ",ending," - no fractional contribution metabolites")))
     met$Names <- met$Name ##
     met <-  mutate(met, Name=paste(Name, Sig, sep=' '),
                    Sig='')

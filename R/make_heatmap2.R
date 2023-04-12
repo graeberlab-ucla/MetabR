@@ -57,7 +57,7 @@ make_heatmap2 <- function (matrix, samples = samples, heat.color = normal, clust
                        color = colorRampPalette(heat.color)(100), border_color = "black",
                        scale = "row", cellwidth = 20, cellheight = 10,
                        annotation = ann, annotation_colors = ann_colors,
-                       show_colnames = F, main = paste(Title, ext, tools::toTitleCase(title_norm) ,sep = "-"),
+                       show_colnames = F, main = paste0(Title, "-", ext, tools::toTitleCase(title_norm)),
                        filename = heatmap.title)
   }else {
     ### Added code to remove rows with zero variance
