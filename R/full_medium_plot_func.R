@@ -69,43 +69,43 @@ full_medium_plot_func<-function (metabolites, df, repeats, n, type=NULL, index =
   scales = "free"
    num_cond=n
 
-    if(is.null(color_lst)){
-      color_lst<-c("turquoise","red","plum4","steelblue1","red4","springgreen2","slateblue2","sienna1","darkgreen","lightpink1","navy","olivedrab1",
-             "orangered","darkslateblue","lightseagreen","magenta2","royalblue","yellowgreen","lightsalmon","cyan","maroon1","indianred3","mediumseagreen",
-             "slateblue3","hotpink","lemonchiffon1","orangered4","lightcoral","tomato")
-    }else{
-      color_lst<-color_lst
-    }
-
-   if(!is.null(index))
-   {
-     j  <- 1
-     k <- 1
-     extra_qc <- c("peachpuff1", "seashell1", "wheat2", "snow1")
-     res <- vector()
-     for( i in 1:num_cond)
-     {
-       if(i %in% index[[1]])
-         res <- c(res, "yellow1")
-       else if(i %in% index[[2]])
-         res <- c(res, "grey45")
-       else if (i %in% index[[4]]){
-         res <- c(res, "darkorange1")
-       }
-       else if(i %in% index[[3]])
-       {
-         res <- c(res, extra_qc[k])
-         k <- k + 1
-       }
-       else
-       {
-         res <- c(res, color_lst[j])
-         j <- j + 1
-       }
-     }
-     color_lst <- res
-   }
-
+   #  if(is.null(color_lst)){
+   #    color_lst<-c("turquoise","red","plum4","steelblue1","red4","springgreen2","slateblue2","darkgreen","lightpink1","navy","olivedrab1",
+   #           "orangered","darkslateblue","lightseagreen","magenta2","royalblue","yellowgreen","lightsalmon","cyan","maroon1","indianred3","mediumseagreen",
+   #           "slateblue3","hotpink","lemonchiffon1","orangered4","lightcoral","tomato")
+   #  }else{
+   #    color_lst<-color_lst
+   #  }
+   #
+   # if(!is.null(index))
+   # {
+   #   j  <- 1
+   #   k <- 1
+   #   extra_qc <- c("peachpuff1", "seashell1", "wheat2", "snow1")
+   #   res <- vector()
+   #   for( i in 1:num_cond)
+   #   {
+   #     if(i %in% index[[1]])
+   #       res <- c(res, "yellow1")
+   #     else if(i %in% index[[2]])
+   #       res <- c(res, "grey45")
+   #     else if (i %in% index[[4]]){
+   #       res <- c(res, "darkorange1")
+   #     }
+   #     else if(i %in% index[[3]])
+   #     {
+   #       res <- c(res, extra_qc[k])
+   #       k <- k + 1
+   #     }
+   #     else
+   #     {
+   #       res <- c(res, color_lst[j])
+   #       j <- j + 1
+   #     }
+   #   }
+   #   color_lst <- res
+   # }
+   color_lst<-colors
 
     a + geom_bar(position="dodge", stat="identity", width=0.9) +
       geom_bar(aes(linetype=under_50_percent,color = under_50_percent, size=under_50_percent),position="dodge", stat="identity", width=0.9) +

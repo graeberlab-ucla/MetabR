@@ -10,13 +10,13 @@
 #' @examples
 info_with_subset_blanks<-function(info){
 #only use on subsets
-samples<-info[which(!grepl("QC|[Pp]ool", info$Sample)),] %>%
+samples<-info[which(!grepl("QC|[Pp]ool|blank", info$Sample)),] %>%
   arrange(Run.Order)
 
 first_run_sample<-samples[1,]
 last_run_sample<-samples[dim(samples)[1],]
 
-qc_blanks<-info[which(grepl("[Bb]lank",info$Sample)),] %>%
+qc_blanks<-info[which(grepl("QC[-.][Bb]lank",info$Sample)),] %>%
   arrange(Run.Order)
 
 minqc_diff<-as.data.frame(cbind(qc_blanks$Sample, as.numeric(abs(first_run_sample$Run.Order-qc_blanks$Run.Order))))
