@@ -18,7 +18,7 @@ Encoding: UTF-8
 imports: qdap, tidyverse, dplyr, data.table, tidyr, IsoCorrectoR, writexl,
     stringr, readr, plyr
 LazyData: true
-RoxygenNote: 7.2.2
+RoxygenNote: 7.2.3
 Imports: 
     accucor,
     accucor2,

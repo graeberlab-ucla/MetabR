@@ -19,7 +19,7 @@ library(dplyr)
 #info sheet
 
 setwd(info_dir)
-file_name <- list.files()[grep('.xls[x]?',list.files())][1]
+file_name <- list.files(pattern='.xls[x]?')[!grepl("\\$|~|raw data|orig|Vanq|Accucor|Metabo",list.files(pattern='.xls[x]?'))][1]
 info <- read_excel(file_name)
 info <- info[!is.na(info$Sample),] #removes non-sample rows (sometimes there is a skipped line)
 info <- info[!grepl("QC", info$Sample),] #removes extra QCs (for now)
