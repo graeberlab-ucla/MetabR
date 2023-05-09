@@ -60,7 +60,7 @@ full_medium_plot_func<-function (metabolites, df, repeats, n, type=NULL, index =
       if(!is.null(mediumtitle)) Title<-mediumtitle
       x = ""
       y = "Amounts"
-      a <- ggplot(met, aes(Condition, RelAmounts_Ave,
+      a <- ggplot(met, aes(Condition, Av,
                            group = Condition, fill = Condition, label = Name))
       axis.text.x = element_blank()
     }
@@ -112,6 +112,7 @@ full_medium_plot_func<-function (metabolites, df, repeats, n, type=NULL, index =
       guides(linetype='none',fill=guide_legend(ncol=1))+
        scale_size_manual(values=c(0.3,0.8), guide = 'none') +
        scale_colour_manual(values = c("black", "gray29"), guide = 'none') +
+      {if (type != "tf") scale_y_continuous(labels = scales::scientific)} +
       facet_wrap( ~ Name, scales=scales) +
       theme_bw() +scale_linetype_manual(values=c("solid","58"))+
       labs(x=x, y=y, title=Title, fill=element_blank()) +
@@ -124,7 +125,11 @@ full_medium_plot_func<-function (metabolites, df, repeats, n, type=NULL, index =
         legend.text=element_text(face="bold",size=12),                  #sets legend text
         strip.text=element_text(face="bold", size=15),           #sets theme for title in facets
         panel.grid.major=element_blank()) +
-      geom_errorbar(aes(ymin=RelAmounts_Ave, ymax=RelAmounts_Ave+RelAmounts_Std), position=position_dodge(0.9), width=.2) +
+      {if (type != "tf") geom_errorbar(
+        aes(ymin=Av-Std, ymax=Av+Std),position=position_dodge(0.9), width=.2)} +
+      {if (type == "tf") geom_errorbar(
+        aes(ymin=RelAmounts_Ave-RelAmounts_Std, ymax=RelAmounts_Ave+RelAmounts_Std),
+        position=position_dodge(0.9), width=.2)} +
       scale_fill_manual(values = color_lst)
     #
   }
