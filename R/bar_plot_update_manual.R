@@ -72,9 +72,11 @@ bar_plot_update_manual <- function(a, met, Title, x, y, axis.text.x, scales, typ
         strip.text=element_text(face="bold", size=15),           #sets theme for title in facets
         panel.grid.major=element_blank()) +
       {if (type != "tf") geom_errorbar(
-        aes(ymin=Av-Std, ymax=Av+Std),position=position_dodge(0.9), width=.2)} +
+        aes(ymin = ifelse(Av-Std < 0, 0, Av-Std), ymax=Av+Std),
+        position=position_dodge(0.9), width=.2)} +
       {if (type == "tf") geom_errorbar(
-        aes(ymin=RelAmounts_Ave-RelAmounts_Std, ymax=RelAmounts_Ave+RelAmounts_Std),
+        aes(ymin = ifelse(RelAmounts_Ave-RelAmounts_Std < 0, 0, RelAmounts_Ave-RelAmounts_Std),
+            ymax=RelAmounts_Ave+RelAmounts_Std),
         position=position_dodge(0.9), width=.2)} +
       scale_fill_manual(values = col)
 
