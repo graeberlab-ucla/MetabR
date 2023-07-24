@@ -24,4 +24,9 @@ Imports:
     magrittr,
     openxlsx,
     stringr,
-    tidyr
+    tidyr,
+    pheatmap,
+    ggplot2
+Remotes:
+  wangyujue23/AccuCor2
+
