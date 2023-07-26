@@ -1,26 +1,18 @@
-
-#' @title Functions to assist in the current UCLA Metabolomics Pipeline.
+#' Update Maven info sheet
 #'
-#' @description This package contains functions to assist in the current UCLA Metabolomics Quality Control and Analysis Pipeline.
+#' Updates excel sheet with sample run orders and the quality control blanks, 250ks, pools, and samples. Used for Maven only.
 #'
-#' @param The path to the original information excel sheet of the analysis.
+#' @import dplyr
+#' @param info_dir string; path to directory containing original info excel sheet for dataset
 #'
-#' @return An updated excel sheet with sample run orders and the quality control blanks, 250ks, pools, and samples. Used for Maven only.
-#'
-# @examples update_info(info_dir = "/Volumes/MavenData ALMOHI/XXX lab/file_folder")
-#'
+#' @return None; writes updated Excel sheet info sheet in specified directory
 #' @export
 #'
-update_info_maven <- function(info_dir, folder = NULL ){
-
-library(readxl)
-library(xlsx)
-library(dplyr)
+update_info_maven <- function(info_dir){
 #info sheet
-
 setwd(info_dir)
-file_name <- list.files()[grep('.xls[x]?',list.files())][1]
-info <- read_excel(file_name)
+file_name <- list.files(pattern='.xls[x]?')[!grepl("\\$|~|raw data|orig|Vanq|Accucor|Metabo",list.files(pattern='.xls[x]?'))][1]
+info <- openxlsx::read.xlsx(file_name)
 info <- info[!is.na(info$Sample),] #removes non-sample rows (sometimes there is a skipped line)
 info <- info[!grepl("QC", info$Sample),] #removes extra QCs (for now)
 #setwd("../")
@@ -75,7 +67,7 @@ info$Run.Order<-(as.numeric(info$Run.Order))  #added this line for proper run or
 #writing out new info sheet
 setwd("../")
 setwd(info_dir)
-write.xlsx(x = info, file = file_name, row.names = F, showNA = F)
+openxlsx::write.xlsx(x = info, file = file_name, rowNames = F, showNA = F)
 }
 
 

@@ -15,16 +15,18 @@ Authors@R: c(
     person("Ashvath", "Balgovind", role = "aut"),
     person("Yi Jou (Ruby)", "Liao", role = "aut"))
 Encoding: UTF-8
-imports: qdap, tidyverse, dplyr, data.table, tidyr, IsoCorrectoR, writexl,
-    stringr, readr, plyr
 LazyData: true
-RoxygenNote: 7.2.2
+RoxygenNote: 7.2.3
 Imports: 
     accucor,
     accucor2,
     dplyr,
     magrittr,
-    readxl,
+    openxlsx,
     stringr,
     tidyr,
-    xlsx
+    pheatmap,
+    ggplot2
+Remotes:
+  wangyujue23/AccuCor2
+

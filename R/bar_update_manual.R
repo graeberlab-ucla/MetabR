@@ -158,11 +158,11 @@ bar_update_manual <- function(metabolites, df, repeats, n, type,index = NULL, ti
       bar_plot_update_manual(a, met, Title, x, y, axis.text.x, scales='free', num_cond = n, type = type,index)
     } else {
       met = subset(df, Name %in% metabolites)
-      if(!(length(unique(met$Name)) >= 1)) return(message(paste0("** ",ending," - no relative amounts metabolites")))
-      Title = paste0("Relative amounts of ",ending)
+      if(!(length(unique(met$Name)) >= 1)) return(message(paste0("** ",ending," - no amounts metabolites")))
+      Title = paste0("Amounts of ",ending)
       x=''
-      y='Relative Amounts'
-      a <-ggplot(met, aes(Condition, RelAmounts_Ave, group=Condition, fill=Condition, label = Name))
+      y='Amounts'
+      a <-ggplot(met, aes(Condition, Av, group=Condition, fill=Condition, label = Name))
       axis.text.x=element_blank()
       bar_plot_update_manual(a, met, Title, x, y, axis.text.x, scales='free', num_cond = n, type = type,index)
     }

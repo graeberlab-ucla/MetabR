@@ -52,11 +52,15 @@ bar_plot_update_manual <- function(a, met, Title, x, y, axis.text.x, scales, typ
     col<-colors
 
     a + geom_bar(position="dodge", stat="identity", width=0.9) +
-      geom_bar(aes(linetype=under_50_percent,color = under_50_percent, size=under_50_percent),position="dodge", stat="identity", width=0.9) +
-      guides(linetype='none',fill=guide_legend(ncol=1))+
-      scale_size_manual(values=c(0.3,0.8), guide = 'none') + scale_colour_manual(values = c("black", "gray29"), guide = 'none') +
+      geom_bar(aes(linetype=under_50_percent,color = under_50_percent, size=under_50_percent),
+               position="dodge", stat="identity", width=0.9) +
+      guides(linetype='none',fill=guide_legend(ncol=1)) +
+      scale_size_manual(values=c(0.3,0.8), guide = 'none') +
+      scale_colour_manual(values = c("black", "gray29"), guide = 'none') +
+      {if (type != "tf") scale_y_continuous(labels = scales::scientific)} +
       facet_wrap( ~ Name, scales=scales) +
-      theme_bw() +scale_linetype_manual(values=c("solid","58"))+
+      theme_bw() +
+      scale_linetype_manual(values=c("solid","58")) +
       labs(x=x, y=y, title=Title, fill=element_blank()) +
       theme(
         plot.title=element_text(size=20, face="bold", vjust=2),         #sets title properties
@@ -67,7 +71,13 @@ bar_plot_update_manual <- function(a, met, Title, x, y, axis.text.x, scales, typ
         legend.text=element_text(face="bold",size=12),                  #sets legend text
         strip.text=element_text(face="bold", size=15),           #sets theme for title in facets
         panel.grid.major=element_blank()) +
-      geom_errorbar(aes(ymin=RelAmounts_Ave, ymax=RelAmounts_Ave+RelAmounts_Std), position=position_dodge(0.9), width=.2)+
+      {if (type != "tf") geom_errorbar(
+        aes(ymin = ifelse(Av-Std < 0, 0, Av-Std), ymax=Av+Std),
+        position=position_dodge(0.9), width=.2)} +
+      {if (type == "tf") geom_errorbar(
+        aes(ymin = ifelse(RelAmounts_Ave-RelAmounts_Std < 0, 0, RelAmounts_Ave-RelAmounts_Std),
+            ymax=RelAmounts_Ave+RelAmounts_Std),
+        position=position_dodge(0.9), width=.2)} +
       scale_fill_manual(values = col)
 
 }

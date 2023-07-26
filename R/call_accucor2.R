@@ -22,7 +22,7 @@ call_accucor2<-function(mid_output, abbrev, output_dir, Title){
   # library(tidyr)
   # library(stringr)
 
-  sheet_name<-"Sheet1"
+  sheet_name<-"Sheet 1"
   resolution=140000
 
   if(dim(subset(mid_output, startsWith(as.character(Iso), "C13N15")))[1]!=0){
@@ -83,8 +83,8 @@ call_accucor2<-function(mid_output, abbrev, output_dir, Title){
 
   sub<-sub%>%select(Name, parent, which(grepl("#", names(sub))), Expected, everything() ) #grabs C,N, or H columns
 
-  xlsx::write.xlsx(sub, paste0("Uncorr_Accucor2_input_",label, ".xlsx"), row.names = F)
-
+  # xlsx::write.xlsx(sub, paste0("Uncorr_Accucor2_input_",label, ".xlsx"), row.names = F)
+  openxlsx::write.xlsx(sub, paste0("Uncorr_Accucor2_input_", label, ".xlsx"), rowNames = F)
 
   corrected <- accucor2::dual_correction(paste0("Uncorr_Accucor2_input_",label, ".xlsx"),
                                sheet_name,paste0("Abbrev_Accucor2_input",  ".csv"),label, Resolution = resolution) #Isotopes can be "CN" or "CH"
