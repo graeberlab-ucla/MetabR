@@ -20,7 +20,7 @@ assign_sample_colors<-function(info){
   Freq$color<-NA
 
   #samples
-  samples<-Freq[which(!grepl("QC|blank|250|pool", Freq$Var1)), ]
+  samples<-Freq[which(!grepl("QC|blank|250|pool", Freq$Var1, ignore.case = T)), ]
   Freq[which(Freq$Var1 %in% samples$Var1),'color']<-color_lst[1:nrow(samples)]
 
   #pools
