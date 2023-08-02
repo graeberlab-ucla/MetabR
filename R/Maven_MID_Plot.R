@@ -13,8 +13,14 @@
 #' @export
 #'
 #' @examples
-Maven_MID_plot <- function(metabolites, df, repeats, n, type, index = NULL, title_type, only_M0 = NA)
+Maven_MID_plot <- function(metabolites, df, repeats, n, type, index = NULL, title_type, only_M0 = NA, ext = NA)
 {
+  if(is.na(ext)){
+    ext = ""
+  }else{
+    ext = paste0(" ", ext)
+  }
+
   if (length(metabolites) > 1) {
     if (title_type == "nonpathway1") {
       ending <- "other metabolites - I"
@@ -110,7 +116,7 @@ Maven_MID_plot <- function(metabolites, df, repeats, n, type, index = NULL, titl
     met$Iso <- gsub("PARENT", "P", met$Iso)
     met <- met %>%
       mutate(Iso = factor(Iso, levels = sort(unique(Iso))))
-    Title = paste0("Isotopologue distribution of ", ending, " (Corrected for natural abundance)")
+    Title = paste0("Isotopologue distribution of ", ending, " (Corrected for natural abundance)",  ext)
     x <- "Isotopologue"
     y <- "% Labeled"
     a <- ggplot(met, aes(Iso, RelAmounts_Ave, group = Condition,
@@ -131,7 +137,7 @@ Maven_MID_plot <- function(metabolites, df, repeats, n, type, index = NULL, titl
       stopifnot(length(unique(met$Name)) >= 1)
       met <- mutate(met, Name = paste(Name, Sig, sep = " "),
                     Sig = "")
-      Title = paste0("Relative amounts of ", ending, " (not corrected for blank values)")
+      Title = paste0("Relative amounts of ", ending, " (not corrected for blank values)",  ext)
       x = ""
       y = "Relative Amounts"
       a <- ggplot(met, aes(Condition, RelAmounts_Ave,
@@ -144,7 +150,7 @@ Maven_MID_plot <- function(metabolites, df, repeats, n, type, index = NULL, titl
     else {
       met = subset(df, Name %in% metabolites)
       stopifnot(length(unique(met$Name)) >= 1)
-      Title = paste0("Relative amounts of ", ending)
+      Title = paste0("Relative amounts of ", ending, , " ", ext)
       x = ""
       y = "Relative Amounts"
       a <- ggplot(met, aes(Condition, RelAmounts_Ave,
@@ -162,7 +168,7 @@ Maven_MID_plot <- function(metabolites, df, repeats, n, type, index = NULL, titl
     met$Names <- met$Name
     met <- mutate(met, Name = paste(Name, Sig, sep = " "),
                   Sig = "")
-    Title <- paste0("Percent labeled in ", ending)
+    Title <- paste0("Percent labeled in ", ending, ext)
     x <- ""
     y <- "% Labeled"
     a <- ggplot(met, aes(Condition, RelAmounts_Ave, group = Condition,
@@ -182,7 +188,7 @@ Maven_MID_plot <- function(metabolites, df, repeats, n, type, index = NULL, titl
     met$Names <- met$Name
     met <- mutate(met, Name = paste(Name, Sig, sep = " "),
                   Sig = "")
-    Title <- paste0("Fractional Contribution to ", ending)
+    Title <- paste0("Fractional Contribution to ", ending, ext)
     x <- ""
     y <- "% Fractional Contribution"
     a <- ggplot(met, aes(Condition, RelAmounts_Ave, group = Condition,
