@@ -116,7 +116,7 @@ Maven_MID_plot <- function(metabolites, df, repeats, n, type, index = NULL, titl
     met$Iso <- gsub("PARENT", "P", met$Iso)
     met <- met %>%
       mutate(Iso = factor(Iso, levels = sort(unique(Iso))))
-    Title = paste0("Isotopologue distribution of ", ending, " (Corrected for natural abundance)",  ext)
+    Title = paste0("Isotopologue distribution of ", ending, ext)
     x <- "Isotopologue"
     y <- "% Labeled"
     a <- ggplot(met, aes(Iso, RelAmounts_Ave, group = Condition,
