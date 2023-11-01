@@ -40,9 +40,13 @@ qc_250k <- qc_250k[order(qc_250k)]
 qc_pool <- samples[grepl("pool|Pool", samples)]
 qc_pool <- qc_pool[order(qc_pool)]
 
-samples <- samples[!(samples %in% qc_blank) & !(samples %in% qc_250k) &!(samples %in% qc_pool)]
+qc_other<-samples[grepl("QC", samples, ignore.case = T)][!grepl("pool|Pool|250|blank", samples[grepl("QC", samples, ignore.case = T)], ignore.case = T)]
+qc_other <- qc_other[order(qc_other)]
+
+samples <- samples[!(samples %in% qc_blank) & !(samples %in% qc_250k) &!(samples %in% qc_pool)&!(samples %in% qc_other)]
 samples <- samples[order(samples)]
 samples <- c(samples, qc_blank)
+samples <- c(samples, qc_other)
 samples <- c(samples, qc_pool)
 samples <- c(samples, qc_250k)
 
