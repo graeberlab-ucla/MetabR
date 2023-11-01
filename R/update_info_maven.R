@@ -14,7 +14,7 @@ setwd(info_dir)
 file_name <- list.files(pattern='.xls[x]?')[!grepl("\\$|~|raw data|orig|Vanq|Accucor|Metabo",list.files(pattern='.xls[x]?'))][1]
 info <- openxlsx::read.xlsx(file_name)
 info <- info[!is.na(info$Sample),] #removes non-sample rows (sometimes there is a skipped line)
-info <- info[!grepl("QC", info$Sample),] #removes extra QCs (for now)
+info <- info[!grepl("QC", info$Sample, ignore.case = T),] #removes extra QCs (for now)
 #setwd("../")
 #Run order
 order_dir<-paste0(info_dir,"/RAW files")
@@ -31,13 +31,13 @@ run_order$Run.Order <- rownames(run_order)
 #make info$sample namings match run_order$Sample
 #Alexzandra added 1/25/22 - lists blanks before 250ks
 samples <- as.vector(run_order$samples)
-qc_blank <- samples[grepl("blank", samples)]
+qc_blank <- samples[grepl("blank", samples, ignore.case = T)]
 qc_blank <- qc_blank[order(qc_blank)]
 
 qc_250k <- samples[grepl("250K", samples) | grepl("250k", samples) | grepl("50k", samples) | grepl("50K", samples)]
 qc_250k <- qc_250k[order(qc_250k)]
 
-qc_pool <- samples[grepl("pool|Pool", samples)]
+qc_pool <- samples[grepl("pool|Pool", samples, ignore.case = T)]
 qc_pool <- qc_pool[order(qc_pool)]
 
 qc_other<-samples[grepl("QC", samples, ignore.case = T)][!grepl("pool|Pool|250|blank", samples[grepl("QC", samples, ignore.case = T)], ignore.case = T)]
