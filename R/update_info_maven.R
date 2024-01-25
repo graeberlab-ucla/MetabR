@@ -33,7 +33,7 @@ run_order$Run.Order <- rownames(run_order)
 samples <- as.vector(run_order$samples)
 #other samples such as "ISTD" or STD or ImP that have different concentrations - usually standards
 other <- samples[!stringr::str_detect(samples, "^[A-Z]{2}[\\-\\.]")]
-#other <- other[other %in% info$Sample]
+#other <- other[other %in% info$Sample] #may be necessary if the ordering is incorrect of the "other" samples
 
 qc_blank <- samples[grepl("blank", samples, ignore.case = T) & !grepl("PB", samples, ignore.case = T)]
 qc_blank <- qc_blank[order(qc_blank)]
@@ -48,14 +48,14 @@ qc_pool <- qc_pool[order(qc_pool)]
 qc_other<-samples[grepl("QC|PB", samples, ignore.case = T)][!grepl("pool|Pool|250|blank", samples[grepl("QC", samples, ignore.case = T)], ignore.case = T)]
 qc_other <- qc_other[order(qc_other)]
 
-samples <- samples[!(samples %in% qc_blank) & !(samples %in% qc_250k) &!(samples %in% qc_pool)&!(samples %in% qc_other)&!(samples %in% other)]
+samples <- samples[!(samples %in% qc_blank) & !(samples %in% qc_250k) &!(samples %in% qc_pool) &!(samples %in% qc_other) &!(samples %in% other)]
 samples <- samples[order(samples)]
 sample.length <- length(samples)
+samples <- c(samples, other)
 samples <- c(samples, qc_other) #processing blank
 samples <- c(samples, qc_blank)
 samples <- c(samples, qc_pool)
 samples <- c(samples, qc_250k)
-samples <- c(samples, other)
 
 #adding empty rows to info for QC's
 to_add <- length(samples) - nrow(info)
