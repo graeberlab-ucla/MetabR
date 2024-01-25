@@ -31,7 +31,11 @@ run_order$Run.Order <- rownames(run_order)
 #make info$sample namings match run_order$Sample
 #Alexzandra added 1/25/22 - lists blanks before 250ks
 samples <- as.vector(run_order$samples)
-qc_blank <- samples[grepl("blank", samples, ignore.case = T)]
+#other samples such as "ISTD" or STD or ImP that have different concentrations - usually standards
+other <- samples[!stringr::str_detect(samples, "[:upper:][:upper:][-]")]
+other <- other[other %in% info$Sample]
+
+qc_blank <- samples[grepl("blank", samples, ignore.case = T) & !grepl("PB", samples, ignore.case = T)]
 qc_blank <- qc_blank[order(qc_blank)]
 
 qc_250k <- samples[grepl("250K", samples) | grepl("250k", samples) | grepl("50k", samples) | grepl("50K", samples)]
@@ -40,15 +44,18 @@ qc_250k <- qc_250k[order(qc_250k)]
 qc_pool <- samples[grepl("pool|Pool", samples, ignore.case = T)]
 qc_pool <- qc_pool[order(qc_pool)]
 
-qc_other<-samples[grepl("QC", samples, ignore.case = T)][!grepl("pool|Pool|250|blank", samples[grepl("QC", samples, ignore.case = T)], ignore.case = T)]
+#processing blanks
+qc_other<-samples[grepl("QC|PB", samples, ignore.case = T)][!grepl("pool|Pool|250|blank", samples[grepl("QC", samples, ignore.case = T)], ignore.case = T)]
 qc_other <- qc_other[order(qc_other)]
 
-samples <- samples[!(samples %in% qc_blank) & !(samples %in% qc_250k) &!(samples %in% qc_pool)&!(samples %in% qc_other)]
+samples <- samples[!(samples %in% qc_blank) & !(samples %in% qc_250k) &!(samples %in% qc_pool)&!(samples %in% qc_other)&!(samples %in% other)]
 samples <- samples[order(samples)]
+sample.length <- length(samples)
+samples <- c(samples, qc_other) #processing blank
 samples <- c(samples, qc_blank)
-samples <- c(samples, qc_other)
 samples <- c(samples, qc_pool)
 samples <- c(samples, qc_250k)
+samples <- c(samples, other)
 
 #adding empty rows to info for QC's
 to_add <- length(samples) - nrow(info)
@@ -63,9 +70,9 @@ info <- info[,c(1,  ncol(info), 2:(ncol(info)-1))] #reordering
 colnames(info)[1] <- "Sample"
 
 #filling condition column if missing (the QCs)
-for (i in 1:nrow(info))
-  if (is.na(info$Condition[i]))
-    info$Condition[i] <- as.character(info$Sample[i])
+for (i in (sample.length+1):nrow(info))
+  #if (is.na(info$Condition[i]))
+  info$Condition[i] <- as.character(info$Sample[i])
 
 info$Run.Order<-(as.numeric(info$Run.Order))  #added this line for proper run order sorting
 #writing out new info sheet
