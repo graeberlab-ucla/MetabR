@@ -32,8 +32,8 @@ run_order$Run.Order <- rownames(run_order)
 #Alexzandra added 1/25/22 - lists blanks before 250ks
 samples <- as.vector(run_order$samples)
 #other samples such as "ISTD" or STD or ImP that have different concentrations - usually standards
-other <- samples[!stringr::str_detect(samples, "[:upper:][:upper:][-]")]
-other <- other[other %in% info$Sample]
+other <- samples[!stringr::str_detect(samples, "^[A-Z]{2}[\\-\\.]")]
+#other <- other[other %in% info$Sample]
 
 qc_blank <- samples[grepl("blank", samples, ignore.case = T) & !grepl("PB", samples, ignore.case = T)]
 qc_blank <- qc_blank[order(qc_blank)]
