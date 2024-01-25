@@ -20,7 +20,7 @@ assign_sample_colors<-function(info){
   Freq$color<-NA
 
   #samples
-  samples<-Freq[which(!grepl("QC|blank|250|pool", Freq$Var1, ignore.case = T)), ]
+  samples<-Freq[which(!grepl("QC|blank|250K|pool|PB|50K|25K", Freq$Var1, ignore.case = T)), ]
   Freq[which(Freq$Var1 %in% samples$Var1),'color']<-color_lst[1:nrow(samples)]
 
   #pools
@@ -31,11 +31,11 @@ assign_sample_colors<-function(info){
   #Freq[which(Freq$Var1 %in% pools$Var1),'color']<-pool_color_lst[1:nrow(pools)]
 
   #blank and 250ks
-  Freq[which(grepl("QC[-.]blank", Freq$Var1)), 'color' ]<-"grey45"
+  Freq[which(grepl("QC[-.]blank[123456]", Freq$Var1)), 'color' ]<-"grey45"
   Freq[which(grepl("QC[-.]250[Kk]|50[Kk]", Freq$Var1)),'color' ]<-"yellow1"
 
   #extra blanks
-  Freq[(which(is.na(Freq$color) & grepl('blank', Freq$Var1, ignore.case = TRUE))),'color']<-"grey20"
+  Freq[(which(is.na(Freq$color) & grepl('blank|PB|QC[-.]PB', Freq$Var1, ignore.case = TRUE))),'color']<-"grey20"
 
   #make it work for exceptions:
   Freq[which(is.na(Freq$color)),'color']<-extra_qc[1:nrow(Freq[which(is.na(Freq$color)),])]
