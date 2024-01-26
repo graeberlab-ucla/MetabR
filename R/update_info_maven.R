@@ -35,7 +35,7 @@ samples <- as.vector(run_order$samples)
 qc_blank <- samples[grepl("blank", samples, ignore.case = T) & !grepl("PB", samples, ignore.case = T)]
 qc_blank <- qc_blank[order(qc_blank)]
 
-qc_250k <- samples[grepl("250K", samples) | grepl("250k", samples) | grepl("50k", samples) | grepl("50K", samples)]
+qc_250k <- samples[grepl("250K", samples) | grepl("250k", samples) | grepl("50k", samples) | grepl("50K", samples) | grepl("25k", samples) | grepl("25K", samples)]
 qc_250k <- qc_250k[order(qc_250k)]
 
 qc_pool <- samples[grepl("pool|Pool", samples, ignore.case = T)]
