@@ -26,7 +26,10 @@ call_accucor1<-function(mid_output, abbrev, Title, info){
     label="N15"
     resolution=140000
   }
-  if(dim(subset(mid_output, startsWith(as.character(Iso), "D-")))[1]!=0) label = "D"
+  if(dim(subset(mid_output, startsWith(as.character(Iso), "D-")))[1]!=0){
+    label = "D"
+    resolution=140000
+  }
 
   corr_success<-TRUE
 

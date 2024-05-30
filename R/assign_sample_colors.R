@@ -31,7 +31,7 @@ assign_sample_colors<-function(info){
   #Freq[which(Freq$Var1 %in% pools$Var1),'color']<-pool_color_lst[1:nrow(pools)]
 
   #blank and 250ks
-  Freq[which(grepl("QC[-.]blank[123456]", Freq$Var1)), 'color' ]<-"grey45"
+  Freq[which(grepl("QC[-.]blank[123456789]", Freq$Var1)), 'color' ]<-"grey45"
   Freq[which(grepl("QC[-.]250[Kk]|50[Kk]", Freq$Var1)),'color' ]<-"yellow1"
 
   #extra blanks
