@@ -32,7 +32,7 @@ assign_sample_colors<-function(info){
 
   #blank and 250ks
   Freq[which(grepl("QC[-.]blank[123456789]", Freq$Var1)), 'color' ]<-"grey45"
-  Freq[which(grepl("QC[-.]250[Kk]|50[Kk]", Freq$Var1)),'color' ]<-"yellow1"
+  Freq[which(grepl("QC[-.]250[Kk]|50[Kk]|25[Kk]", Freq$Var1)),'color' ]<-"yellow1"
 
   #extra blanks
   Freq[(which(is.na(Freq$color) & grepl('blank|PB|QC[-.]PB', Freq$Var1, ignore.case = TRUE))),'color']<-"grey20"
