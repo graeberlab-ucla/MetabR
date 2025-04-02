@@ -25,6 +25,7 @@ make_heatmap2 <- function (matrix, samples = samples, heat.color = normal, clust
   }
   if (exists("samples") == F)
     samples <- info
+  samples <- samples %>% arrange(Condition)
   ann <- select(samples, Condition, Cell.Number) %>% as.data.frame()
   rownames(ann) <- colnames(matrix)
   #ann$Cell.Number <- 1
