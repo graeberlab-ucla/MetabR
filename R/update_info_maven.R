@@ -78,6 +78,11 @@ for (i in (sample.length+1):nrow(info))
   #if (is.na(info$Condition[i]))
   info$Condition[i] <- as.character(info$Sample[i])
 
+# Remove extra whitespace before and after Condition and Sample names
+trim <- function (x) gsub("^\\s+|\\s+$", "", x)
+info$Condition <- trim(info$Condition)
+info$Sample <- trim(info$Sample)
+
 info$Run.Order<-(as.numeric(info$Run.Order))  #added this line for proper run order sorting
 #writing out new info sheet
 setwd("../")
