@@ -28,6 +28,7 @@ lastqc_diff<-as.data.frame(cbind(qc_blanks$Sample, as.numeric(abs(last_run_sampl
 lastqc<-min(as.numeric(lastqc_diff$V2))
 blank2<-lastqc_diff%>%filter(V2==as.character(lastqc))
 blank2<-blank2$V1 #QC-Blank run right after samples
+if(length(blank2)>1) blank2 <- blank2[which(!blank2 %in% blank1)]
 
 if(dim(qc_blanks)[1]>2){
 qc_to_remove<-qc_blanks[which(!grepl(blank1, qc_blanks$Sample) & !grepl(blank2, qc_blanks$Sample)),]
