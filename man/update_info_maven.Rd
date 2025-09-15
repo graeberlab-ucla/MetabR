@@ -2,16 +2,16 @@
 % Please edit documentation in R/update_info_maven.R
 \name{update_info_maven}
 \alias{update_info_maven}
-\title{Functions to assist in the current UCLA Metabolomics Pipeline.}
+\title{Update Maven info sheet}
 \usage{
-update_info_maven(info_dir, folder = NULL)
+update_info_maven(info_dir)
 }
 \arguments{
-\item{The}{path to the original information excel sheet of the analysis.}
+\item{info_dir}{string; path to directory containing original info excel sheet for dataset}
 }
 \value{
-An updated excel sheet with sample run orders and the quality control blanks, 250ks, pools, and samples. Used for Maven only.
+None; writes updated Excel sheet info sheet in specified directory
 }
 \description{
-This package contains functions to assist in the current UCLA Metabolomics Quality Control and Analysis Pipeline.
+Updates excel sheet with sample run orders and the quality control blanks, 250ks, pools, and samples. Used for Maven only.
 }

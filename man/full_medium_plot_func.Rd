@@ -7,22 +7,18 @@
 full_medium_plot_func(
   metabolites,
   df,
-  repeats,
   n,
   type = NULL,
   index = NULL,
   title_type,
   only_M0 = NA,
-  mediumtitle = NULL,
-  color_lst = NULL
+  mediumtitle = NULL
 )
 }
 \arguments{
 \item{metabolites}{list of metabolites used to run experiment}
 
 \item{df}{amounts3 or amounts}
-
-\item{repeats}{Not currently used}
 
 \item{n}{n = num_conditions}
 
@@ -35,8 +31,6 @@ full_medium_plot_func(
 \item{only_M0}{Not currently being used}
 
 \item{mediumtitle}{mediumtitle="Plots-Relative-To-Fresh"}
-
-\item{color_lst}{m_ind<-which(!grepl("unspent|[Bb]lank|[Ff]resh|[Cc]ontrol|[Mm]edium|[Mm]edia",unique(amounts$Condition)))   amounts3_colors<- colors1[m_ind]}
 }
 \value{
 a plot of the relative amounts or samples relative to unspent of specific metabolites

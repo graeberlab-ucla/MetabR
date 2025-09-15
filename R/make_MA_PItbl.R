@@ -10,7 +10,7 @@
 #' @return Peak intensity CSV in data_dir / network folder
 #' @export
 make_MA_PItbl <- function(data_dir, info, Abbrev, abbr = F) {
-  md <- readxl::read_excel(
+  md <- openxlsx::read.xlsx(
     list.files(data_dir, pattern = "^Maven Data|^MavenData|^Maven data", full.names = T))
   md <- md[complete.cases(md),] # Remove "A" rows
   md[,2:ncol(md)] <- sapply(md[,2:ncol(md)], as.numeric) # Numeric type
