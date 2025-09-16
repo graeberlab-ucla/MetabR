@@ -60,7 +60,7 @@ make_matrix <- function(MS_data, Type, anova=0.05){
 
   cols_to_remove <- which(
     colSums(data5) == 0 &
-      !(gsub("_Exp", "_", colnames(data5)) %in% info$Sample.Name)
+      !(gsub("_Exp", "_", colnames(data5)) %in% samples$Sample.Name)
   )
 
   if (length(cols_to_remove) > 0) {
