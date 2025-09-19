@@ -12,7 +12,11 @@ update_info_maven <- function(info_dir){
 #info sheet
 setwd(info_dir)
 file_name <- list.files(pattern='.xls[x]?')[!grepl("\\$|~|raw data|orig|Vanq|Accucor|Metabo",list.files(pattern='.xls[x]?'))][1]
-info <- openxlsx::read.xlsx(file_name)
+if(file.exists(file_name)){
+  info <- openxlsx::read.xlsx(file_name)
+}else{
+  stop(cat(paste("❌ Info sheet file doesn't exist", collapse = "\n"), "\n\n"))
+}
 info <- info[!is.na(info$Sample),] #removes non-sample rows (sometimes there is a skipped line)
 info <- info[!grepl("QC", info$Sample, ignore.case = T),] #removes extra QCs (for now)
 #setwd("../")
@@ -21,11 +25,11 @@ order_dir<-paste0(info_dir,"/RAW files")
 if(dir.exists(order_dir)){
   setwd(order_dir)
 }else{
-  stop(paste0("RAW files folder does not exists"))
+  stop(cat(paste("❌ RAW files folder does not exists",collapse = "\n"), "\n\n"))
 }
 raw_files <- list.files(pattern = "*.raw")
 
-if (length(raw_files) == 0) stop(paste0("RAW files folder doesn't contain any files"))
+if (length(raw_files) == 0) stop(cat(paste("❌ RAW files folder doesn't contain any files",collapse = "\n"), "\n\n"))
 
 file_data <- file.info(raw_files)
 file_data <- file_data[order(as.POSIXct(file_data$mtime)), ]
