@@ -18,8 +18,16 @@ info <- info[!grepl("QC", info$Sample, ignore.case = T),] #removes extra QCs (fo
 #setwd("../")
 #Run order
 order_dir<-paste0(info_dir,"/RAW files")
-setwd(order_dir)
-file_data <- file.info(list.files(pattern = "*.raw"))
+if(dir.exists(order_dir)){
+  setwd(order_dir)
+}else{
+  stop(paste0("RAW files folder does not exists"))
+}
+raw_files <- list.files(pattern = "*.raw")
+
+if (length(raw_files) == 0) stop(paste0("RAW files folder doesn't contain any files"))
+
+file_data <- file.info(raw_files)
 file_data <- file_data[order(as.POSIXct(file_data$mtime)), ]
 
 run_order <- row.names(file_data)
