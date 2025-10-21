@@ -11,7 +11,7 @@
 #' @export
 make_MA_PItbl <- function(data_dir, info, Abbrev, abbr = F) {
   md <- openxlsx::read.xlsx(
-    list.files(data_dir, pattern = "^Maven Data|^MavenData|^Maven data|mavendata|mavenData", full.names = T))
+    list.files(data_dir, pattern = "^Maven Data|^MavenData|^Maven data|mavendata|mavenData", full.names = T, ignore.case = T))
   md <- md[complete.cases(md),] # Remove "A" rows
   md[,2:ncol(md)] <- sapply(md[,2:ncol(md)], as.numeric) # Numeric type
   names(md) <- sub("_neg.mzXML|_pos.mzXML", "", names(md)) # Fix colnames
