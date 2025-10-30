@@ -47,7 +47,7 @@ check_50<-function(df)
       if ((df[n,condition_samples[x]])!= 0){
         value_exist=value_exist+1
       }}
-    if (value_exist<thresh & value_exist != 0 & !grepl("blank|250K|QC-0|50K", df$Condition[n])){
+    if (value_exist<thresh & value_exist != 0 & !grepl("blank|250K|QC-0|50K|PB", df$Condition[n], ignore.case = T)){
       under_50_percent<-c(under_50_percent,"X")
     }
     else{under_50_percent<-c(under_50_percent,"")}
