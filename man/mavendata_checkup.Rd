@@ -6,9 +6,6 @@
 \usage{
 mavendata_checkup(file_path)
 }
-\arguments{
-\item{file_path}{}
-}
 \description{
 mavendata_checkup
 }

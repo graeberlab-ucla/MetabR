@@ -1,11 +1,11 @@
 #' mavendata_checkup
 #'
-#' @param file_path 
+#' @param file_path
+#' @importFrom readxl read_excel
+#' @importFrom tools file_path_sans_ext
 #'
 mavendata_checkup <- function(file_path) {
-  library(readxl)
-  library(tools)
-  
+
   # Load file, skipping blank first row
   df_orig <- read_excel(file_path, skip = 1)
   messages <- list()
@@ -18,16 +18,16 @@ mavendata_checkup <- function(file_path) {
   prefixes <- sub("_.*", "", colnames_vector)
   num_samples <- length(prefixes)
   lst <- list()
-  
+
   for (j in 1:nrow(df)) {
     row_values <- as.character(unlist(df[j, ]))
     non_numeric <- sum(!grepl("^[0-9.]+$", row_values))
     has_sample_like <- any(grepl("QC|QS|neg|pos", row_values, ignore.case = TRUE))
-    
+
     if (non_numeric > num_samples / 2 && has_sample_like) {
       row_prefixes <- sub("_.*", "", row_values)
       mismatch_idx <- which(row_prefixes != prefixes)
-      
+
       if (length(mismatch_idx) > 0) {
         lst[[paste0("Row_", j)]] <- list(
           mismatches = mismatch_idx,
@@ -37,12 +37,12 @@ mavendata_checkup <- function(file_path) {
       }
     }
   }
-  
+
   if (length(lst) == 0) {
     messages <- c(messages, "✅ No mismatches found in detected sample ID rows.")
   } else {
     messages <- c(messages, "❌ Mismatches found:")
-    
+
     grouped <- list()
     make_key <- function(entry) {
       paste(
@@ -52,13 +52,13 @@ mavendata_checkup <- function(file_path) {
         sep = "||"
       )
     }
-    
+
     for (row_name in names(lst)) {
       entry <- lst[[row_name]]
       key <- make_key(entry)
       grouped[[key]] <- c(grouped[[key]], gsub("^Row_", "", row_name))
     }
-    
+
     mismatch_messages <- character()
     for (key in names(grouped)) {
       parts <- strsplit(key, "\\|\\|")[[1]]
@@ -66,17 +66,17 @@ mavendata_checkup <- function(file_path) {
       expected_str <- parts[2]
       found_str <- parts[3]
       rows_str <- paste(grouped[[key]], collapse = ", ")
-      
+
       msg <- sprintf(
         "❌ Rows %s: Mismatches at positions [%s]\n  Expected: [%s]\n  Found:    [%s]",
         rows_str, mismatch_str, expected_str, found_str
       )
       mismatch_messages <- c(mismatch_messages, msg)
     }
-    
+
     messages <- c(messages, paste(mismatch_messages, collapse = "\n\n"))
   }
-  
+
   # -------------------------------
   # QC PART 2: Check spacing
   # -------------------------------
@@ -86,20 +86,20 @@ mavendata_checkup <- function(file_path) {
     n <- length(vec)
     i <- 1
     block_num <- 1
-    
+
     if (vec[i] != "") {
       messages <<- c(messages, "❌ Pattern violation: First row is not empty.")
       return(FALSE)
     }
     i <- i + 1
-    
+
     while (i <= n) {
       if (i > n || vec[i] == "") {
         messages <<- c(messages, sprintf("❌ Pattern violation: Expected text at position %d.", i))
         return(FALSE)
       }
       while (i <= n && vec[i] != "") i <- i + 1
-      
+
       empty_run <- 0
       while (i <= n && vec[i] == "") {
         empty_run <- empty_run + 1
@@ -117,9 +117,9 @@ mavendata_checkup <- function(file_path) {
     messages <<- c(messages, "✅ Column matches the expected pattern.")
     return(TRUE)
   }
-  
+
   check_column_pattern(df_orig$...1)
-  
+
   # -------------------------------
   # QC PART 3: Duplicate Metabolites
   # -------------------------------
@@ -127,7 +127,7 @@ mavendata_checkup <- function(file_path) {
   metabs <- na.omit(df_metab[, 1])
   names(metabs)[1] <- "Compound"
   dups <- unique(metabs$Compound[which(duplicated(metabs$Compound))])
-  
+
   if (length(dups) > 0) {
     messages <- c(messages, sprintf("❌ There are duplicate metabolites of %s. Please fix.", dups))
     for (i in seq_along(dups)) {
@@ -141,34 +141,34 @@ mavendata_checkup <- function(file_path) {
   } else {
     messages <- c(messages, "✅ No duplicate metabolites")
   }
-  
+
   # -------------------------------
   # QC PART 4: Extra RAW Files
   # -------------------------------
-  
+
   raw_dir <- "RAW files"
   cat(file_path)
   # mzxml_dir <- "mzXML"
   extra_dir <- file.path(dirname(raw_dir), "extra_raw_files")
-  
+
   if (!dir.exists(raw_dir)) stop("RAW files folder does not exist.")
   # if (!dir.exists(mzxml_dir)) stop("mzXML folder does not exist.")
-  
+
   raw_files <- list.files(raw_dir, pattern = "\\.raw$", ignore.case = TRUE, full.names = FALSE)
   raw_basenames <- tools::file_path_sans_ext(raw_files)
-  
+
   # ---- Code for if we want to run setdiff between raw files and unique mzxml files
-  
+
   # mzxml_files <- list.files(mzxml_dir, pattern = "\\.mzXML$", ignore.case = TRUE, full.names = FALSE)
   # mzxml_basenames <- gsub("(_neg|_pos)?\\.mzXML$", "", mzxml_files, ignore.case = TRUE)
   # mzxml_unique <- unique(mzxml_basenames)
-  # 
+  #
   # extra_raw_basenames <- setdiff(raw_basenames, mzxml_unique)
-  
+
   #extra_raw_basenames <- setdiff(raw_basenames, prefixes)
   # Identify overlap
   common <- intersect(raw_basenames, prefixes)
-  
+
   if (length(common) == 0) {
     messages <- c(messages, sprintf("⚠️ No overlap found between raw_basenames and prefixes."))
     extra_raw_basenames <- character(0)  # or raw_basenames if you want to treat all as extras
@@ -176,7 +176,7 @@ mavendata_checkup <- function(file_path) {
     extra_raw_basenames <- raw_basenames[!(raw_basenames %in% prefixes)]
   }
   extra_raw_fullpaths <- file.path(raw_dir, paste0(extra_raw_basenames, ".raw"))
-  
+
   if (length(extra_raw_basenames) > 0) {
     if (!dir.exists(extra_dir)) dir.create(extra_dir)
     for (f in extra_raw_fullpaths) {
@@ -192,7 +192,7 @@ mavendata_checkup <- function(file_path) {
   } else {
     messages <- c(messages, "✅ No extra RAW files found.")
   }
-  
+
   # -------------------------------
   # Final Report
   # -------------------------------
