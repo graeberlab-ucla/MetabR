@@ -1,8 +1,9 @@
 #' mavendata_checkup
 #'
-#' @param file_path
+#' @param file_path string path of mavendata file
 #' @importFrom readxl read_excel
 #' @importFrom tools file_path_sans_ext
+#' @export
 #'
 mavendata_checkup <- function(file_path) {
 
