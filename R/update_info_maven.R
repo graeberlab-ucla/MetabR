@@ -75,8 +75,9 @@ samples <- c(samples, qc_250k)
 
 #adding empty rows to info for QC's
 to_add <- length(samples) - nrow(info)
-for (i in 1:to_add)
-  info[nrow(info)+1,] <- NA
+if (to_add>0)
+  for (i in 1:to_add)
+    info[nrow(info)+1,] <- NA
 info <- cbind(samples, info)
 info$Sample <- NULL
 
@@ -86,9 +87,10 @@ info <- info[,c(1,  ncol(info), 2:(ncol(info)-1))] #reordering
 colnames(info)[1] <- "Sample"
 
 #filling condition column if missing (the QCs)
-for (i in (sample.length+1):nrow(info))
-  #if (is.na(info$Condition[i]))
-  info$Condition[i] <- as.character(info$Sample[i])
+if ((sample.length+1)<=nrow(info))
+  for (i in (sample.length+1):nrow(info))
+    #if (is.na(info$Condition[i]))
+    info$Condition[i] <- as.character(info$Sample[i])
 
 # Remove extra whitespace before and after Condition and Sample names
 trim <- function (x) gsub("^\\s+|\\s+$", "", x)
