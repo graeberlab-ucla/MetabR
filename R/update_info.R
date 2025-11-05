@@ -65,8 +65,9 @@ update_info <- function(info_dir, folder = NULL )
 
   #adding empty rows to info for QC's
   to_add <- length(samples) - nrow(info)
-  for (i in 1:to_add)
-    info[nrow(info)+1,] <- NA
+  if (to_add > 0)
+    for (i in 1:to_add)
+      info[nrow(info)+1,] <- NA
   info <- cbind(samples, info)
   info$Sample <- NULL
 
