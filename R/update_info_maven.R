@@ -17,6 +17,7 @@ if(file.exists(file_name)){
 }else{
   stop(cat(paste("❌ Info sheet file doesn't exist", collapse = "\n"), "\n\n"))
 }
+info$Sample.as.named.on.google.drive = info$Sample
 info <- info[!is.na(info$Sample),] #removes non-sample rows (sometimes there is a skipped line)
 info <- info[!grepl("QC", info$Sample, ignore.case = T),] #removes extra QCs (for now)
 #setwd("../")
