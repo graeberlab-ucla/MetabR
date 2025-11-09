@@ -11,7 +11,7 @@
 update_info_maven <- function(info_dir){
 #info sheet
 setwd(info_dir)
-file_name <- list.files(pattern='.xls[x]?')[!grepl("\\$|~|raw data|orig|Vanq|Accucor|Metabo",list.files(pattern='.xls[x]?'))][1]
+file_name <- list.files(pattern='.xls[x]?')[!grepl("\\$|~|raw data|orig|Vanq|Accucor|Metabo|parameters",list.files(pattern='.xls[x]?'))][1]
 if(file.exists(file_name)){
   info <- openxlsx::read.xlsx(file_name)
 }else{
