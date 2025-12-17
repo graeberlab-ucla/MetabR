@@ -24,12 +24,14 @@ assign_sample_colors<-function(info){
   Freq[which(Freq$Var1 %in% samples$Var1),'color']<-color_lst[1:nrow(samples)]
 
   #pools
-  Freq[which(grepl("[Pp]ool", Freq$Var1)), 'color' ]<-"darkorange"
-
-  #uncomment if orange color range across pools is needed
-  #pools<-Freq[which(grepl("[Pp]ool", Freq$Var1)), ]
-  #Freq[which(Freq$Var1 %in% pools$Var1),'color']<-pool_color_lst[1:nrow(pools)]
-
+  if (0) {
+    Freq[which(grepl("[Pp]ool", Freq$Var1)), 'color' ]<-"darkorange"
+  } else {
+  #if orange color range across pools is needed
+    pools<-Freq[which(grepl("[Pp]ool", Freq$Var1)), ]
+    Freq[which(Freq$Var1 %in% pools$Var1),'color']<-pool_color_lst[1:nrow(pools)]
+  }
+  
   #blank and 250ks
   Freq[which(grepl("QC[-.]blank[123456789]", Freq$Var1)), 'color' ]<-"grey45"
   Freq[which(grepl("QC[-.]250[Kk]|50[Kk]|25[Kk]", Freq$Var1)),'color' ]<-"yellow1"
