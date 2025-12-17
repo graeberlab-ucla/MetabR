@@ -29,7 +29,15 @@ assign_sample_colors<-function(info){
   } else {
   #if orange color range across pools is needed
     pools<-Freq[which(grepl("[Pp]ool", Freq$Var1)), ]
-    Freq[which(Freq$Var1 %in% pools$Var1),'color']<-pool_color_lst[1:nrow(pools)]
+    #Freq[which(Freq$Var1 %in% pools$Var1),'color']<-pool_color_lst[1:nrow(pools)]
+    pools$pool.set = gsub("\\-\\d+$","",pools$Var1)
+    pool.sets = unique(pools$pool.set)
+    pool.colors = as.data.frame(unique(pools$pool.set))
+    names(pool.colors)[1]="pool.set"
+    pool.colors$color = pool_color_lst[1:nrow(pool.colors)]
+    Freq$pool.set = ifelse(grepl("[Pp]ool",Freq$Var1),gsub("\\-\\d+$","\\1",Freq$Var1),NA)
+    Freq[!is.na(Freq$pool.set),]$color <- pool.colors$color[match(Freq[!is.na(Freq$pool.set),]$pool.set, pool.colors$pool.set)]
+    Freq = Freq %>% dplyr::select(-pool.set)
   }
   
   #blank and 250ks
